@@ -149,7 +149,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 02b5a1d0da22f824ba3b399b35812566, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1224237047}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27dc7fbc44cf414f94c1462ec452695, type: 3}
   m_Name: 
@@ -391,12 +391,6 @@ MonoBehaviour:
   keyL1: joystick button 4
   keyL2: LT Axis
   keyL3: jotstick button 9
-  h: 0
-  v: 0
-  ch: 0
-  cv: 0
-  r2: 0
-  l2: 0
 --- !u!114 &1224237049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +416,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1224237047}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b4c58885deed4744859c77829cbe22f, type: 3}
   m_Name: 
@@ -438,8 +432,9 @@ MonoBehaviour:
   cKeyRight: right
   keyA: left shift
   keyB: space
-  keyC: j
-  keyD: k
+  keyC: mouse 0
+  keyD: mouse 1
+  mouseEnable: 1
 --- !u!54 &1224237051
 Rigidbody:
   m_ObjectHideFlags: 0

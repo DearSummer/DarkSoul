@@ -20,6 +20,15 @@ public class XBOXJoystickInput : PlayerInput
     public string keyL2 = "LT Axis";
     public string keyL3 = "jotstick button 9";
 
+    private ButtonSignal _btnX = new ButtonSignal();
+    private ButtonSignal _btnY = new ButtonSignal();
+    private ButtonSignal _btnA = new ButtonSignal();
+    private ButtonSignal _btnB = new ButtonSignal();
+    private ButtonSignal _btnR1 = new ButtonSignal();
+    private ButtonSignal _btnR2 = new ButtonSignal();
+    private ButtonSignal _btnL1 = new ButtonSignal();
+    private ButtonSignal _btnL2 = new ButtonSignal();
+
 
     private float targetUpValue;
     private float upValueVelocity;
@@ -44,6 +53,10 @@ public class XBOXJoystickInput : PlayerInput
             targetUpValue = 0f;
         }
 
+        Jump = _btnA.OnPressed;
+        Attack = _btnX.OnPressed;
+        Run = Math.Abs(Input.GetAxis(keyR2)) > 0f;
+
 
         UpValue = Mathf.SmoothDamp(UpValue, targetUpValue, ref upValueVelocity, 0.1f);
         RightValue = Mathf.SmoothDamp(RightValue, targetRightValue, ref rightValueVelocity, 0.1f);
@@ -66,12 +79,17 @@ public class XBOXJoystickInput : PlayerInput
         targetRightValue = Input.GetAxis("Left X Axis");
 
         targetCRightValue = Input.GetAxis("Right X Axis");
-        targetCUpValue = Input.GetAxis("Right Y Axis");
+        targetCUpValue = Input.GetAxis("Right Y Axis");        
 
-        Jump = Input.GetKey(keyA);
-        Attack = Input.GetKeyDown(keyX);
-        Run = Math.Abs(Input.GetAxis(keyR2)) > 0f;
-        Magic = Input.GetKeyDown(keyY);
+        _btnA.Tick(Input.GetKey(keyA));
+        _btnB.Tick(Input.GetKey(keyB));
+        _btnX.Tick(Input.GetKey(keyX));
+        _btnY.Tick(Input.GetKey(keyY));
+
+        _btnL1.Tick(Input.GetKey(keyL1));
+        _btnL2.Tick(Input.GetKey(keyL2));
+        _btnR1.Tick(Input.GetKey(keyR1));
+        _btnR2.Tick(Input.GetKey(keyR2));
 
     }
 
