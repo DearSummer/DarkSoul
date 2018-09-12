@@ -74,7 +74,7 @@ public class PlayerInput : MonoBehaviour {
 
     public Vector3 SignalVec
     {
-        set;
+        protected set;
         get;
     }
 

@@ -84,7 +84,9 @@ public class CameraController : MonoBehaviour
 
     private void LockEnemy()
     {
-        
+        Vector3 pos = _lockTarget.transform.position - _player.transform.position;
+        pos.y = 0;
+        yAxis.transform.forward = Vector3.Lerp(yAxis.transform.forward, pos, 0.1f);
     }
 
     private void TranslateCameraPos()

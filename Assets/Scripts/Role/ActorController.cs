@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
  
  
@@ -23,6 +24,7 @@ public class ActorController : MonoBehaviour
     public PhysicMaterial zeroFriction;
 
     private CapsuleCollider _capsuleCollider;
+    private CameraController _cameraController;
 
     private Animator _animator;
     private Rigidbody _rigidbody;
@@ -36,8 +38,7 @@ public class ActorController : MonoBehaviour
     private readonly IPlayerState _airState = new AirState();
     private readonly IPlayerState _attackState = new AttackState();
 
-
-    private float _forwardValue;
+  
 
     // Use this for initialization
     void Awake()
@@ -54,22 +55,30 @@ public class ActorController : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _animator = player.GetComponent<Animator>();
 
+        _cameraController = GetComponentInChildren<CameraController>();
+
         _machine = new PlayerFiniteStateMachine(player, this, _groundState, InputSignal, _animator, _rigidbody);
     }
 
     // Update is called once per frame
     void Update()
     {
+        GroundAnimHandler();
+        ActionHandler();
 
-        _forwardValue = InputSignal.SignalValueMagic * (InputSignal.Run ? 3.0f : 4.0f);
-        if (!InputSignal.Run)
-            _forwardValue = Mathf.Clamp(_forwardValue, 0, 1);
 
-        _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD,_forwardValue);
+        _machine.Update();
+    }
 
+    private void ActionHandler()
+    {
         if (InputSignal.Roll || _rigidbody.velocity.magnitude > 8f)
         {
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.ROLL);
+        }
+        else
+        {
+            _animator.ResetTrigger(ProjectConstant.AnimatorParameter.ROLL);
         }
 
         if (InputSignal.Jump)
@@ -83,9 +92,6 @@ public class ActorController : MonoBehaviour
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
             _machine.TranslateTo(_attackState);
         }
-
-
-        _machine.Update();
     }
 
 
@@ -94,6 +100,38 @@ public class ActorController : MonoBehaviour
         _machine.FixUpdate();
     }
 
+
+    private void GroundAnimHandler()
+    {
+        float forwardValue = InputSignal.SignalValueMagic * (InputSignal.Run ? 3.0f : 4.0f);
+        if (!InputSignal.Run)
+            forwardValue = Mathf.Clamp(forwardValue, 0, 1);
+        if (!_cameraController.IsLock)
+        {
+            //在非锁定敌人的状况下无需right参数进行左右移动
+            _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD, forwardValue);
+            _animator.SetFloat(ProjectConstant.AnimatorParameter.RIGHT, 0);
+        }
+        else
+        {
+            if (!InputSignal.Run && Math.Abs(_animator.GetFloat(ProjectConstant.AnimatorParameter.FORWARD)) > 0.1f)
+            {
+                _animator.SetFloat(ProjectConstant.AnimatorParameter.RIGHT, 0);
+            }
+            else
+            {
+                _animator.SetFloat(ProjectConstant.AnimatorParameter.RIGHT,
+                    Mathf.Lerp(_animator.GetFloat(ProjectConstant.AnimatorParameter.RIGHT),
+                        (InputSignal.Run ? 2.0f : 1.0f) * InputSignal.RightValue, 0.1f));
+            }
+
+
+            _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD,
+                (InputSignal.Run ? 2.0f : 1.0f ) * InputSignal.UpValue);
+
+            Debug.Log(InputSignal.UpValue);
+        }
+    }
 
     private void OnGroundEnter()
     {

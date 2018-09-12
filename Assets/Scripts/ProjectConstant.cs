@@ -31,8 +31,7 @@ public static class ProjectConstant
         public static readonly string ROLL = "roll";
         public static readonly string ATTACK = "attack";
         public static readonly string DIE = "die";
-        public static readonly string FIRE = "fire";
-        public static readonly string ICE = "ice";
+        public static readonly string RIGHT = "right";
     }
 
     public class AnimatorLayer
