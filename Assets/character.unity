@@ -375,7 +375,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1224237047}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b27dc7fbc44cf414f94c1462ec452695, type: 3}
   m_Name: 
@@ -390,7 +390,7 @@ MonoBehaviour:
   keyR3: joystick button 8
   keyL1: joystick button 4
   keyL2: LT Axis
-  keyL3: jotstick button 9
+  keyL3: joystick button 9
 --- !u!114 &1224237049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1224237047}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b4c58885deed4744859c77829cbe22f, type: 3}
   m_Name: 

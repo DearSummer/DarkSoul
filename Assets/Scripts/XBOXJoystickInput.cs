@@ -15,18 +15,20 @@ public class XBOXJoystickInput : PlayerInput
     [Header("----------ex key---------")]
     public string keyR1 = "joystick button 5";
     public string keyR2 = "RT Axis";
-    public string keyR3 = "joystick button 8";
+    public string keyR3 = "joystick button 9";
     public string keyL1 = "joystick button 4";
     public string keyL2 = "LT Axis";
-    public string keyL3 = "joystick button 9";
+    public string keyL3 = "joystick button 8";
 
     private readonly ButtonSignal _btnX = new ButtonSignal();
     private readonly ButtonSignal _btnY = new ButtonSignal();
     private readonly ButtonSignal _btnA = new ButtonSignal();
     private readonly ButtonSignal _btnB = new ButtonSignal();
     private readonly ButtonSignal _btnR1 = new ButtonSignal();
+    private readonly ButtonSignal _btnR2 = new ButtonSignal();
     private readonly ButtonSignal _btnR3 = new ButtonSignal();
     private readonly ButtonSignal _btnL1 = new ButtonSignal();
+    private readonly ButtonSignal _btnL2 = new ButtonSignal();
     private readonly ButtonSignal _btnL3 = new ButtonSignal();
 
 
@@ -80,6 +82,7 @@ public class XBOXJoystickInput : PlayerInput
         Attack = _btnX.OnPressed;
         Run = (_btnA.IsPressing && !_btnA.IsDelaying) || _btnA.IsExtending;
 
+        LockOn = _btnL2.OnPressed;
     }
 
     private void InputHandler()
@@ -96,8 +99,10 @@ public class XBOXJoystickInput : PlayerInput
         _btnY.Tick(Input.GetKey(keyY));
 
         _btnL1.Tick(Input.GetKey(keyL1));
+        _btnL2.Tick(Math.Abs(Input.GetAxis(keyL2)) > 0);
         _btnL3.Tick(Input.GetKey(keyL3));
         _btnR1.Tick(Input.GetKey(keyR1));
+        _btnR2.Tick(Math.Abs(Input.GetAxis(keyR2)) > 0);
         _btnR3.Tick(Input.GetKey(keyR3));
 
         
