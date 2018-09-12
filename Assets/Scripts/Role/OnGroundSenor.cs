@@ -40,7 +40,7 @@ using UnityEngine;
                             transform.up * (_radius - offset);
 
             Collider[] outputColliders = Physics.OverlapCapsule(_capsulePoint1, _capsulePoint2, _radius,
-                LayerMask.GetMask(ProjectConstant.Layout.GROUND));
+                LayerMask.GetMask(ProjectConstant.Layer.GROUND));
             return outputColliders.Length > 0;
         }
     }

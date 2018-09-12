@@ -13,20 +13,11 @@ public static class ProjectConstant
 {
 
 
-    public class Tag
+    public class Layer
     {
+        
         public static readonly string GROUND = "Ground";
-        public static readonly string PLAYER = "Player";
         public static readonly string ENEMY = "Enemy";
-        public static readonly string ACTIVE_ENEMY = "ActiveEnemy";
-        public static readonly string SKILL_CANVAS = "SkillCanvas";
-    }
-
-    public class Layout
-    {
-        public static readonly string RENDER_OUTLINE = "RenderOutline";
-        public static readonly string GROUND = "Ground";
-
     }
 
     public class AnimatorParameter

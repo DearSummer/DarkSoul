@@ -24,22 +24,11 @@ public class ActorController : MonoBehaviour
 
     private CapsuleCollider _capsuleCollider;
 
-    private PlayerInput _inputSignal;
-
     private Animator _animator;
     private Rigidbody _rigidbody;
 
-    private Vector3 _animMovePos;
-    public Vector3 AnimMovePos
-    {
-        set { _animMovePos = value; }
-        get { return _animMovePos; }
-    }
-
-    public PlayerInput InputSignal
-    {
-        get { return _inputSignal; }
-    }
+    public Vector3 AnimMovePos { set; get; }
+    public PlayerInput InputSignal { get; private set; }
 
     private IMachine _machine;
 
@@ -57,7 +46,7 @@ public class ActorController : MonoBehaviour
         foreach (var input in inputList)
         {
             if (!input.enabled) continue;
-            _inputSignal = input;
+            InputSignal = input;
             break;
         }
 
@@ -65,15 +54,15 @@ public class ActorController : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _animator = player.GetComponent<Animator>();
 
-        _machine = new PlayerFiniteStateMachine(player, this, _groundState, _inputSignal, _animator, _rigidbody);
+        _machine = new PlayerFiniteStateMachine(player, this, _groundState, InputSignal, _animator, _rigidbody);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        _forwardValue = _inputSignal.SignalValueMagic * (_inputSignal.Run ? 3.0f : 4.0f);
-        if (!_inputSignal.Run)
+        _forwardValue = InputSignal.SignalValueMagic * (InputSignal.Run ? 3.0f : 4.0f);
+        if (!InputSignal.Run)
             _forwardValue = Mathf.Clamp(_forwardValue, 0, 1);
 
         _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD,_forwardValue);
@@ -83,13 +72,13 @@ public class ActorController : MonoBehaviour
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.ROLL);
         }
 
-        if (_inputSignal.Jump)
+        if (InputSignal.Jump)
         {
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.JUMP);
             _machine.TranslateTo(_airState);
         }
 
-        if (_inputSignal.Attack && _machine.GetCurrentState() != _airState)
+        if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
         {
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
             _machine.TranslateTo(_attackState);
@@ -144,7 +133,7 @@ public class ActorController : MonoBehaviour
 
     private void AnimatorMove(object movePos)
     {
-        _animMovePos += (Vector3) movePos;
+        AnimMovePos += (Vector3) movePos;
     }
 
     private int GetLayerIndex(string layerName)

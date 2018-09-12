@@ -98,6 +98,7 @@ public class KeyBoardInput : PlayerInput
         Jump = Input.GetKey(keyB);
         Attack = Input.GetKeyDown(keyC);
         Magic = Input.GetKeyDown(keyD);
+        LockOn = Input.GetKeyDown(KeyCode.Q);
     }
 
 }

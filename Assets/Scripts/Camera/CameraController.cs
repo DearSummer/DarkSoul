@@ -1,7 +1,8 @@
 
 using UnityEngine;
- 
- 
+using UnityEngine.UI;
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
@@ -19,15 +20,25 @@ public class CameraController : MonoBehaviour
     [Header("--------camera angel-----")]
     public float maxAngel = 30f;
     public float minAngel = -40f;
-    
+
+    [Header("-------lock doc----------")]
+    public Image lockDoc;
+
+    public bool IsLock
+    {
+        private set;
+        get;
+    }
+
     private GameObject _player;
     private ActorController _controller;
 
-    private GameObject camera;
-    private Vector3 cameraVolicity;
+    private GameObject _camera;
 
     private float _eulerAngelX;
     private Vector3 _preFramePlayerEulerAngel;
+
+    private GameObject _lockTarget;
 
     // Use this for initialization
     void Awake()
@@ -35,19 +46,45 @@ public class CameraController : MonoBehaviour
         _controller = GetComponentInParent<ActorController>();
         _player = _controller.player;
 
-        camera = Camera.main.gameObject;
+        _camera = Camera.main.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
+
+        EnableLockDoc(false);
     }
 
+    private void Update()
+    {
+        if (_controller.InputSignal.LockOn)
+        {
+            Lock();
+        }
+
+        if (IsLock)
+        {
+            lockDoc.transform.position = Camera.main.WorldToScreenPoint(_lockTarget.transform.position);
+            AutoUnlock();
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        TranslateCameraPos();
+        if (!IsLock)
+        {
+            TranslateCameraPos();
+        }
+        else
+        {
+            LockEnemy();
+        }
 
+        _camera.transform.position = Vector3.Slerp(_camera.transform.position, xAxis.transform.position, 0.5f);
+        _camera.transform.eulerAngles = xAxis.transform.eulerAngles;
+    }
 
-        camera.transform.position = Vector3.Slerp(camera.transform.position, xAxis.transform.position, 0.5f);
-        camera.transform.eulerAngles = xAxis.transform.eulerAngles;
+    private void LockEnemy()
+    {
+        
     }
 
     private void TranslateCameraPos()
@@ -63,8 +100,52 @@ public class CameraController : MonoBehaviour
 
     }
 
+    private void AutoUnlock()
+    {
+        if (Vector3.Distance(_lockTarget.transform.position, _player.transform.position) > 8f)
+        {
+            EnableLockDoc(false);
+        }
+    }
 
+    private void Lock()
+    {
+        Vector3 playerOriginPos1 = _player.transform.position;
+        Vector3 playerOriginPos2 = playerOriginPos1 + new Vector3(0, 1, 0);
+        Vector3 center = playerOriginPos2 + _player.transform.forward * 5f;
 
+        Collider[] cols = Physics.OverlapBox(center, new Vector3(0.5f, 0.5f, 5f), _player.transform.rotation,
+            LayerMask.GetMask(ProjectConstant.Layer.ENEMY));
+
+        if (cols.Length == 0)
+        {
+            return;
+        }
+
+        foreach (var col in cols)
+        {
+            if (col.gameObject == _lockTarget)
+            {
+                _lockTarget = null;
+                EnableLockDoc(false);
+                break;               
+            }
+            
+            _lockTarget = col.gameObject;
+            EnableLockDoc(true);
+            break;
+        }
+    }
+
+    private void EnableLockDoc(bool enable)
+    {
+        IsLock = enable;
+        lockDoc.enabled = enable;
+        if (!enable)
+        {
+            _lockTarget = null;
+        }
+    }
 
 }
 
