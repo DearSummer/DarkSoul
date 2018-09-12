@@ -18,29 +18,29 @@ public class XBOXJoystickInput : PlayerInput
     public string keyR3 = "joystick button 8";
     public string keyL1 = "joystick button 4";
     public string keyL2 = "LT Axis";
-    public string keyL3 = "jotstick button 9";
+    public string keyL3 = "joystick button 9";
 
-    private ButtonSignal _btnX = new ButtonSignal();
-    private ButtonSignal _btnY = new ButtonSignal();
-    private ButtonSignal _btnA = new ButtonSignal();
-    private ButtonSignal _btnB = new ButtonSignal();
-    private ButtonSignal _btnR1 = new ButtonSignal();
-    private ButtonSignal _btnR2 = new ButtonSignal();
-    private ButtonSignal _btnL1 = new ButtonSignal();
-    private ButtonSignal _btnL2 = new ButtonSignal();
+    private readonly ButtonSignal _btnX = new ButtonSignal();
+    private readonly ButtonSignal _btnY = new ButtonSignal();
+    private readonly ButtonSignal _btnA = new ButtonSignal();
+    private readonly ButtonSignal _btnB = new ButtonSignal();
+    private readonly ButtonSignal _btnR1 = new ButtonSignal();
+    private readonly ButtonSignal _btnR3 = new ButtonSignal();
+    private readonly ButtonSignal _btnL1 = new ButtonSignal();
+    private readonly ButtonSignal _btnL3 = new ButtonSignal();
 
 
-    private float targetUpValue;
-    private float upValueVelocity;
+    private float _targetUpValue;
+    private float _upValueVelocity;
 
-    private float targetRightValue;
-    private float rightValueVelocity;
+    private float _targetRightValue;
+    private float _rightValueVelocity;
 
-    private float targetCUpValue;
-    private float cUpValueVelocity;
+    private float _targetCUpValue;
+    private float _cUpValueVelocity;
 
-    private float targetCRightValue;
-    private float cRightValueVelocity;
+    private float _targetCRightValue;
+    private float _cRightValueVelocity;
 
     void Update()
     {
@@ -49,20 +49,22 @@ public class XBOXJoystickInput : PlayerInput
 
         if (!inputEnable)
         {
-            targetRightValue = 0f;
-            targetUpValue = 0f;
+            _targetRightValue = 0f;
+            _targetUpValue = 0f;
         }
 
         Jump = _btnA.OnPressed;
         Attack = _btnX.OnPressed;
         Run = Math.Abs(Input.GetAxis(keyR2)) > 0f;
 
+        print("long press" + (_btnX.IsExtending || _btnX.IsPressing));
+        print("double press" + (_btnX.IsExtending && _btnX.OnPressed));
 
-        UpValue = Mathf.SmoothDamp(UpValue, targetUpValue, ref upValueVelocity, 0.1f);
-        RightValue = Mathf.SmoothDamp(RightValue, targetRightValue, ref rightValueVelocity, 0.1f);
+        UpValue = Mathf.SmoothDamp(UpValue, _targetUpValue, ref _upValueVelocity, 0.1f);
+        RightValue = Mathf.SmoothDamp(RightValue, _targetRightValue, ref _rightValueVelocity, 0.1f);
 
-        CUpValue = Mathf.SmoothDamp(CUpValue, targetCUpValue, ref cUpValueVelocity, 0.3f);
-        CRightValue = Mathf.SmoothDamp(CRightValue, targetCRightValue, ref cRightValueVelocity, 0.3f);
+        CUpValue = Mathf.SmoothDamp(CUpValue, _targetCUpValue, ref _cUpValueVelocity, 0.3f);
+        CRightValue = Mathf.SmoothDamp(CRightValue, _targetCRightValue, ref _cRightValueVelocity, 0.3f);
 
         Vector2 temp = SquareToCircle(new Vector2(UpValue, RightValue));
 
@@ -75,11 +77,11 @@ public class XBOXJoystickInput : PlayerInput
 
     private void InputHandler()
     {
-        targetUpValue = Input.GetAxis("Left Y Axis");
-        targetRightValue = Input.GetAxis("Left X Axis");
+        _targetUpValue = Input.GetAxis("Left Y Axis");
+        _targetRightValue = Input.GetAxis("Left X Axis");
 
-        targetCRightValue = Input.GetAxis("Right X Axis");
-        targetCUpValue = Input.GetAxis("Right Y Axis");        
+        _targetCRightValue = Input.GetAxis("Right X Axis");
+        _targetCUpValue = Input.GetAxis("Right Y Axis");        
 
         _btnA.Tick(Input.GetKey(keyA));
         _btnB.Tick(Input.GetKey(keyB));
@@ -87,10 +89,11 @@ public class XBOXJoystickInput : PlayerInput
         _btnY.Tick(Input.GetKey(keyY));
 
         _btnL1.Tick(Input.GetKey(keyL1));
-        _btnL2.Tick(Input.GetKey(keyL2));
+        _btnL3.Tick(Input.GetKey(keyL3));
         _btnR1.Tick(Input.GetKey(keyR1));
-        _btnR2.Tick(Input.GetKey(keyR2));
+        _btnR3.Tick(Input.GetKey(keyR3));
 
+        
     }
 
 

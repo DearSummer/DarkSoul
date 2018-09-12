@@ -21,11 +21,21 @@ public class ButtonSignal {
         get;
     }
 
+    public bool IsExtending
+    {
+        private set;
+        get;
+    }
+
     private bool _curState = false;
     private bool _lastState = false;
 
+    private readonly DSTimer _timer = new DSTimer();
+
     public void Tick(bool input)
     {
+
+        _timer.Tick();
 
         _curState = input;
 
@@ -42,8 +52,11 @@ public class ButtonSignal {
             else
             {
                 OnRelease = false;
+                _timer.StartTimer(0.5f);
             }
         }
+
+        IsExtending = _timer.State == DSTimer.TimerState.FINISH;
 
         _lastState = _curState;
     }
