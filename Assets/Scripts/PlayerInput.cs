@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour {
 
+    public bool Roll
+    {
+        protected set;
+        get;
+    }
+
     public bool Run
     {
         protected set;

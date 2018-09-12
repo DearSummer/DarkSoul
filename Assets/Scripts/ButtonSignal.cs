@@ -27,15 +27,26 @@ public class ButtonSignal {
         get;
     }
 
+    public bool IsDelaying
+    {
+        private set;
+        get;
+    }
+
+    private float _extendDuration = 0.15f;
+    private float _delayDuration = 0.15f;
+
     private bool _curState = false;
     private bool _lastState = false;
 
-    private readonly DSTimer _timer = new DSTimer();
+    private readonly DSTimer _extendTimer = new DSTimer();
+    private readonly DSTimer _delayTimer = new DSTimer();
 
     public void Tick(bool input)
     {
 
-        _timer.Tick();
+        _extendTimer.Tick();
+        _delayTimer.Tick();
 
         _curState = input;
 
@@ -48,16 +59,29 @@ public class ButtonSignal {
             if (_curState == true)
             {
                 OnPressed = true;
+                _delayTimer.StartTimer(_delayDuration);
+               
             }
             else
             {
-                OnRelease = false;
-                _timer.StartTimer(0.5f);
+                OnRelease = true;
+                _extendTimer.StartTimer(_extendDuration);
             }
         }
 
-        IsExtending = _timer.State == DSTimer.TimerState.FINISH;
+        IsExtending = _extendTimer.State == DSTimer.TimerState.RUN;
+        IsDelaying = _delayTimer.State == DSTimer.TimerState.RUN;
 
         _lastState = _curState;
+    }
+
+    public void SetExtendDurationTime(float time)
+    {
+        _extendDuration = time;
+    }
+
+    public void SetDelayDurationTime(float time)
+    {
+        _delayDuration = time;
     }
 }

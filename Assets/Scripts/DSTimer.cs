@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,36 +19,39 @@ public class DSTimer
         set;
     }
 
-    private float duration = 1f;
-    private float elapsedTime = 0f;
+    private float _duration = 1f;
+    private float _elapsedTime = 0f;
 
     public void Tick()
     {
         switch (State)
         {
             case TimerState.FINISH:
+                State = TimerState.IDEL;
                 break;
             case TimerState.IDEL:
                 break;
             case TimerState.RUN:
-                elapsedTime += Time.deltaTime;
-                if (elapsedTime > duration)
+                _elapsedTime += Time.deltaTime;
+                if (_elapsedTime > _duration)
                 {
                     State = TimerState.FINISH;
                 }
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
     public void StartTimer(float duration)
     {
-        this.duration = duration;
+        this._duration = duration;
         Run();      
     }
 
     public void Run()
     {
-        elapsedTime = 0f;
+        _elapsedTime = 0f;
         State = TimerState.RUN;
     }
 }

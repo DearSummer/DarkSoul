@@ -78,7 +78,7 @@ public class ActorController : MonoBehaviour
 
         _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD,_forwardValue);
 
-        if (_rigidbody.velocity.magnitude > 8f)
+        if (InputSignal.Roll || _rigidbody.velocity.magnitude > 8f)
         {
             _animator.SetTrigger(ProjectConstant.AnimatorParameter.ROLL);
         }

@@ -53,13 +53,13 @@ public class XBOXJoystickInput : PlayerInput
             _targetUpValue = 0f;
         }
 
-        Jump = _btnA.OnPressed;
-        Attack = _btnX.OnPressed;
-        Run = Math.Abs(Input.GetAxis(keyR2)) > 0f;
+        HandleActionSignal();
+        CalculationAxisSignal();
+        
+    }
 
-        print("long press" + (_btnX.IsExtending || _btnX.IsPressing));
-        print("double press" + (_btnX.IsExtending && _btnX.OnPressed));
-
+    private void CalculationAxisSignal()
+    {
         UpValue = Mathf.SmoothDamp(UpValue, _targetUpValue, ref _upValueVelocity, 0.1f);
         RightValue = Mathf.SmoothDamp(RightValue, _targetRightValue, ref _rightValueVelocity, 0.1f);
 
@@ -71,8 +71,15 @@ public class XBOXJoystickInput : PlayerInput
         SignalValueMagic = Mathf.Sqrt(temp.x * temp.x + temp.y * temp.y);
         SignalVec = temp.x * this.transform.forward + temp.y * this.transform.right;
 
+    }
 
-        
+    private void HandleActionSignal()
+    {
+        Roll = _btnA.IsDelaying && _btnA.OnRelease;
+        Jump = _btnA.OnPressed && _btnA.IsExtending;
+        Attack = _btnX.OnPressed;
+        Run = (_btnA.IsPressing && !_btnA.IsDelaying) || _btnA.IsExtending;
+
     }
 
     private void InputHandler()
