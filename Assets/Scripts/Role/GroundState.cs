@@ -1,45 +1,48 @@
-
+using DS.Role.FSM;
 using UnityEngine;
- 
- 
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
-public class GroundState : IPlayerState
+namespace DS.Role
 {
-    private Vector3 _movingVec;
-
-    private GameObject _player;
-    private ActorController _controller;
-
-    public void OnEnter(GameObject player, ActorController controller)
+    public class GroundState : IPlayerState
     {
-        this._player = player;
-        _controller = controller;
-    }
+        private Vector3 _movingVec;
 
-    public void Update(PlayerInput inputSignal, Animator animator)
-    {
+        private GameObject _player;
+        private ActorController _controller;
 
-        if (inputSignal.SignalValueMagic > 0.1f)
+        public void OnEnter(GameObject player, ActorController controller)
         {
-            _player.transform.forward = Vector3.Slerp(_player.transform.forward, inputSignal.SignalVec, 0.1f);
+            this._player = player;
+            _controller = controller;
         }
 
-        _movingVec = inputSignal.SignalValueMagic * _player.transform.forward *
-                     (inputSignal.Run ? _controller.runVelocity : _controller.moveVelocity);
-    }
+        public void Update(PlayerInput inputSignal, Animator animator)
+        {
 
-    public void FixedUpdate(Rigidbody rigidbody)
-    {       
-        rigidbody.velocity = new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z);
-    }
+            if (inputSignal.SignalValueMagic > 0.1f)
+            {
+                _player.transform.forward = Vector3.Slerp(_player.transform.forward, inputSignal.SignalVec, 0.1f);
+            }
 
-    public void OnExit()
-    {
+            _movingVec = inputSignal.SignalValueMagic * _player.transform.forward *
+                         (inputSignal.Run ? _controller.runVelocity : _controller.moveVelocity);
+        }
 
+        public void FixedUpdate(Rigidbody rigidbody)
+        {       
+            rigidbody.velocity = new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z);
+        }
+
+        public void OnExit()
+        {
+
+        }
     }
 }
 

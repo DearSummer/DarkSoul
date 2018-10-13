@@ -1,14 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
- 
- 
+
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
+namespace DS.Role.FSM
+{
     public interface IMachine
     {
         void Update();
@@ -17,4 +16,5 @@ using UnityEngine;
         IPlayerState GetCurrentState();
 
     }
+}
 

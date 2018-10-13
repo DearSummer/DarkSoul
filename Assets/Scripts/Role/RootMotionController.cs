@@ -1,14 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- 
- 
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
+namespace DS.Role
+{
     public class RootMotionController : MonoBehaviour
     {
         private Animator _animator;
@@ -24,4 +23,5 @@ using UnityEngine;
         }
 
     }
+}
 

@@ -1,12 +1,14 @@
-
+using DS.Role.FSM;
 using UnityEngine;
- 
- 
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
+namespace DS.Role
+{
     public class AirState : IPlayerState
     {
         private Vector3 _movingVec;
@@ -22,7 +24,7 @@ using UnityEngine;
         {
             var input = player.GetComponentInParent<KeyBoardInput>();
             _movingVec = input.SignalValueMagic * player.transform.forward *
-                        (input.Run ? controller.runVelocity : controller.moveVelocity);
+                         (input.Run ? controller.runVelocity : controller.moveVelocity);
 
             _jumpVec = new Vector3(0, controller.jumpVelocity, 0);
 
@@ -41,7 +43,7 @@ using UnityEngine;
         }
 
         public void FixedUpdate(Rigidbody rigidbody)
-        {            
+        {
             rigidbody.velocity = new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z) + _jumpVec;
             if (!(_jumpVec == Vector3.zero))
             {
@@ -67,5 +69,6 @@ using UnityEngine;
 
 
     }
+}
 
 

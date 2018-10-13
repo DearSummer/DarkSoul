@@ -1,31 +1,33 @@
-using System;
-
+using DS.Role.FSM;
 using UnityEngine;
- 
- 
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
-public class AttackState : IPlayerState
+namespace DS.Role
 {
-
-    public void OnEnter(GameObject player, ActorController controller)
+    public class AttackState : IPlayerState
     {
-        controller.GetComponent<Rigidbody>().velocity = Vector3.zero;
-    }
 
-    public void Update(PlayerInput inputSignal, Animator animator)
-    {
-    }
+        public void OnEnter(GameObject player, ActorController controller)
+        {
+            controller.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
 
-    public void FixedUpdate(Rigidbody rigidbody)
-    {
-    }
+        public void Update(PlayerInput inputSignal, Animator animator)
+        {
+        }
 
-    public void OnExit()
-    {
+        public void FixedUpdate(Rigidbody rigidbody)
+        {
+        }
+
+        public void OnExit()
+        {
+        }
     }
 }
 

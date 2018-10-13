@@ -1,19 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- 
- 
+
+
 //-------------------------------------------
 //  author: Billy
 //  description:  
 //-------------------------------------------
 
+namespace DS.Role
+{
     public class AnimatorEventController : MonoBehaviour
     {
         private Animator animator;
+
         // Use this for initialization
-        void Awake ()
+        void Awake()
         {
             animator = GetComponent<Animator>();
         }
@@ -24,4 +24,5 @@ using UnityEngine;
         }
 
     }
+}
 
