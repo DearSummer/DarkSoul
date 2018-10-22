@@ -44,7 +44,6 @@ using UnityEngine;
                 _curPlayerState.FixedUpdate(_rigidbody);
 
 
-                Debug.Log(_controller.AnimMovePos);
                 _rigidbody.position += _controller.AnimMovePos;
                 _controller.AnimMovePos = Vector3.zero;
             
