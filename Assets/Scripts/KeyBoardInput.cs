@@ -41,18 +41,6 @@ namespace DS
         private readonly ButtonSignal _btnC = new ButtonSignal();
         private readonly ButtonSignal _btnD = new ButtonSignal();
 
-        private float _targetUpValue;
-        private float _targetRightValue;
-
-        private float _targetCUpvalue;
-        private float _targetCRightValue;
-
-        private float _velocityUpValue;
-        private float _velocityRightValue;
-
-        private float _velocityCUpValue;
-        private float _velocityCRightValue;
-
 
 
         // Update is called once per frame
@@ -62,12 +50,12 @@ namespace DS
 
             if (!inputEnable)
             {
-                _targetRightValue = 0f;
-                _targetUpValue = 0f;
+                targetRightValue = 0f;
+                targetUpValue = 0f;
             }
 
             HandleAction();
-            CalculatorAxisValue();
+            CalculationAxisSignal();
         }
 
         private void HandleAction()
@@ -79,38 +67,24 @@ namespace DS
             LockOn = _btnB.OnPressed;
         }
 
-        private void CalculatorAxisValue()
-        {
-            UpValue = Mathf.SmoothDamp(UpValue, _targetUpValue, ref _velocityUpValue, 0.1f);
-            RightValue = Mathf.SmoothDamp(RightValue, _targetRightValue, ref _velocityRightValue, 0.1f);
-
-            CUpValue = Mathf.SmoothDamp(CUpValue, _targetCUpvalue, ref _velocityCUpValue, 0.3f);
-            CRightValue = Mathf.SmoothDamp(CRightValue, _targetCRightValue, ref _velocityCRightValue, 0.3f);
-
-
-            Vector2 temp = SquareToCircle(new Vector2(UpValue, RightValue));
-
-            SignalValueMagic = Mathf.Sqrt(temp.x * temp.x + temp.y * temp.y);
-            SignalVec = temp.x * this.transform.forward + temp.y * this.transform.right;
-        }
 
         /// <summary>
         /// 控制输入的信息
         /// </summary>
         private void InputHandler()
         {
-            _targetUpValue = (Input.GetKey(keyUp) ? 1.0f : 0f) - (Input.GetKey(keyDown) ? 1.0f : 0f);
-            _targetRightValue = (Input.GetKey(keyRight) ? 1.0f : 0f) - (Input.GetKey(keyLeft) ? 1.0f : 0f);
+            targetUpValue = (Input.GetKey(keyUp) ? 1.0f : 0f) - (Input.GetKey(keyDown) ? 1.0f : 0f);
+            targetRightValue = (Input.GetKey(keyRight) ? 1.0f : 0f) - (Input.GetKey(keyLeft) ? 1.0f : 0f);
 
             if (mouseEnable)
             {
-                _targetCUpvalue = Input.GetAxis("Mouse Y");
-                _targetCRightValue = Input.GetAxis("Mouse X");
+                targetCUpValue = Input.GetAxis("Mouse Y");
+                targetCRightValue = Input.GetAxis("Mouse X");
             }
             else
             {
-                _targetCUpvalue = (Input.GetKey(cKeyUp) ? 1.0f : 0f) - (Input.GetKey(cKeyDown) ? 1.0f : 0f);
-                _targetCRightValue = (Input.GetKey(cKeyRight) ? 1.0f : 0f) - (Input.GetKey(cKeyLeft) ? 1.0f : 0f);
+                targetCUpValue = (Input.GetKey(cKeyUp) ? 1.0f : 0f) - (Input.GetKey(cKeyDown) ? 1.0f : 0f);
+                targetCRightValue = (Input.GetKey(cKeyRight) ? 1.0f : 0f) - (Input.GetKey(cKeyLeft) ? 1.0f : 0f);
             }
 
 

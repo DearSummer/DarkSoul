@@ -32,18 +32,6 @@ namespace DS
         private readonly ButtonSignal _btnL3 = new ButtonSignal();
 
 
-        private float _targetUpValue;
-        private float _upValueVelocity;
-
-        private float _targetRightValue;
-        private float _rightValueVelocity;
-
-        private float _targetCUpValue;
-        private float _cUpValueVelocity;
-
-        private float _targetCRightValue;
-        private float _cRightValueVelocity;
-
         void Update()
         {
 
@@ -51,28 +39,13 @@ namespace DS
 
             if (!inputEnable)
             {
-                _targetRightValue = 0f;
-                _targetUpValue = 0f;
+                targetRightValue = 0f;
+                targetUpValue = 0f;
             }
 
             HandleActionSignal();
             CalculationAxisSignal();
         
-        }
-
-        private void CalculationAxisSignal()
-        {
-            UpValue = Mathf.SmoothDamp(UpValue, _targetUpValue, ref _upValueVelocity, 0.1f);
-            RightValue = Mathf.SmoothDamp(RightValue, _targetRightValue, ref _rightValueVelocity, 0.1f);
-
-            CUpValue = Mathf.SmoothDamp(CUpValue, _targetCUpValue, ref _cUpValueVelocity, 0.3f);
-            CRightValue = Mathf.SmoothDamp(CRightValue, _targetCRightValue, ref _cRightValueVelocity, 0.3f);
-
-            Vector2 temp = SquareToCircle(new Vector2(UpValue, RightValue));
-
-            SignalValueMagic = Mathf.Sqrt(temp.x * temp.x + temp.y * temp.y);
-            SignalVec = temp.x * this.transform.forward + temp.y * this.transform.right;
-
         }
 
         private void HandleActionSignal()
@@ -87,11 +60,11 @@ namespace DS
 
         private void InputHandler()
         {
-            _targetUpValue = Input.GetAxis("Left Y Axis");
-            _targetRightValue = Input.GetAxis("Left X Axis");
+            targetUpValue = Input.GetAxis("Left Y Axis");
+            targetRightValue = Input.GetAxis("Left X Axis");
 
-            _targetCRightValue = Input.GetAxis("Right X Axis");
-            _targetCUpValue = Input.GetAxis("Right Y Axis");        
+            targetCRightValue = Input.GetAxis("Right X Axis");
+            targetCUpValue = Input.GetAxis("Right Y Axis");        
 
             _btnA.Tick(Input.GetKey(keyA));
             _btnB.Tick(Input.GetKey(keyB));

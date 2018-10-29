@@ -40,7 +40,7 @@ namespace DS.Role
         private readonly IPlayerState _groundState = new GroundState();
         private readonly IPlayerState _airState = new AirState();
         private readonly IPlayerState _attackState = new AttackState();
-
+        private readonly IPlayerState _hitState = new HitState();
   
 
         // Use this for initialization
@@ -152,9 +152,14 @@ namespace DS.Role
             _animator.SetBool(ProjectConstant.AnimatorParameter.ON_GROUND, false);
         }
 
-        private void OnIdleStateEnter()
+//        private void OnIdleStateEnter()
+//        {
+//            _machine.TranslateTo(_groundState);
+//        }
+
+        private void OnHitUpwordStateEnter()
         {
-            _machine.TranslateTo(_groundState);
+            _machine.TranslateTo(_hitState);
         }
 
         private void AnimatorMove(object movePos)
@@ -167,6 +172,9 @@ namespace DS.Role
             return _animator.GetLayerIndex(layerName);
         }
 
-
+        public void IssueTrigger(string triggerName)
+        {
+            _animator.SetTrigger(triggerName);
+        }
     }
 }

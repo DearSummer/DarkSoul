@@ -11,6 +11,10 @@ namespace DS
     public static class ProjectConstant
     {
 
+        public class Tag
+        {
+            public static readonly string WEAPON = "Weapon";
+        }
 
         public class Layer
         {
@@ -21,8 +25,6 @@ namespace DS
 
         public class AnimatorParameter
         {
-            public static readonly string BASE_LAYER_ANIMTION = "animation";
-
             public static readonly string FORWARD = "forward";
             public static readonly string JUMP = "jump";
             public static readonly string ON_GROUND = "onGround";
@@ -31,6 +33,7 @@ namespace DS
             public static readonly string ATTACK = "attack";
             public static readonly string DIE = "die";
             public static readonly string RIGHT = "right";
+            public static readonly string HIT = "hit";
         }
 
         public class AnimatorLayer

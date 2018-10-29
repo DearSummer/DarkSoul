@@ -107,5 +107,30 @@ namespace DS
 
             return result;
         }
+
+        protected float targetUpValue;
+        protected float targetRightValue;
+        protected float targetCUpValue;
+        protected float targetCRightValue;
+
+        private float _upValueVelocity;       
+        private float _rightValueVelocity;
+        private float _cUpValueVelocity;
+        private float _cRightValueVelocity;
+
+        protected void CalculationAxisSignal()
+        {
+            UpValue = Mathf.SmoothDamp(UpValue, targetUpValue, ref _upValueVelocity, 0.1f);
+            RightValue = Mathf.SmoothDamp(RightValue, targetRightValue, ref _rightValueVelocity, 0.1f);
+
+            CUpValue = Mathf.SmoothDamp(CUpValue, targetCUpValue, ref _cUpValueVelocity, 0.3f);
+            CRightValue = Mathf.SmoothDamp(CRightValue, targetCRightValue, ref _cRightValueVelocity, 0.3f);
+
+            Vector2 temp = SquareToCircle(new Vector2(UpValue, RightValue));
+
+            SignalValueMagic = Mathf.Sqrt(temp.x * temp.x + temp.y * temp.y);
+            SignalVec = temp.x * this.transform.forward + temp.y * this.transform.right;
+
+        }
     }
 }
