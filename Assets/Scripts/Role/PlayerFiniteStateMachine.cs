@@ -63,6 +63,11 @@ using UnityEngine;
             {
                 return _curPlayerState;
             }
+
+            public string GetCurrentStateName()
+            {
+                return _curPlayerState.GetStateName();
+            }
         }
     }
 

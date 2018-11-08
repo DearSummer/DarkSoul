@@ -22,6 +22,7 @@ namespace DS.Role
         public float runVelocity;
         public float jumpVelocity;
 
+
         [Header("--------physic material-----")]
         public PhysicMaterial fullFriction;
         public PhysicMaterial zeroFriction;
@@ -41,6 +42,8 @@ namespace DS.Role
         private readonly IPlayerState _airState = new AirState();
         private readonly IPlayerState _attackState = new AttackState();
         private readonly IPlayerState _hitState = new HitState();
+        private readonly IPlayerState _defenseState = new DefenseState();
+        private readonly IPlayerState _deathState = new DeathState();
   
 
         // Use this for initialization
@@ -95,6 +98,11 @@ namespace DS.Role
                 _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
                 _machine.TranslateTo(_attackState);
             }
+
+            if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
+            {
+                _animator.SetTrigger(ProjectConstant.AnimatorParameter.DEFENSE);
+            }
         }
 
 
@@ -135,6 +143,16 @@ namespace DS.Role
             }
         }
 
+        private void OnDeathStateEnter()
+        {
+            _machine.TranslateTo(_deathState);
+        }
+
+        private void OnDefenseStateEnter()
+        {
+            _machine.TranslateTo(_defenseState);
+        }
+
         private void OnGroundEnter()
         {
             _machine.TranslateTo(_groundState);
@@ -151,11 +169,6 @@ namespace DS.Role
             _capsuleCollider.material = zeroFriction;
             _animator.SetBool(ProjectConstant.AnimatorParameter.ON_GROUND, false);
         }
-
-//        private void OnIdleStateEnter()
-//        {
-//            _machine.TranslateTo(_groundState);
-//        }
 
         private void OnHitUpwordStateEnter()
         {
@@ -175,6 +188,11 @@ namespace DS.Role
         public void IssueTrigger(string triggerName)
         {
             _animator.SetTrigger(triggerName);
+        }
+
+        public string GetCurrentState()
+        {
+            return _machine.GetCurrentStateName();
         }
     }
 }

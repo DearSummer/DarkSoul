@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -13,6 +14,7 @@ namespace DS.Role.FSM
         void OnEnter(GameObject player, ActorController controller);
         void Update(PlayerInput inputSignal, Animator animator);
         void FixedUpdate(Rigidbody rigidbody);
+        string GetStateName();
         void OnExit();
     }
 }

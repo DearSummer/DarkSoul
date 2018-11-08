@@ -25,6 +25,11 @@ namespace DS.Role
         {
         }
 
+        public string GetStateName()
+        {
+            return "AttackState";
+        }
+
         public void OnExit()
         {
         }

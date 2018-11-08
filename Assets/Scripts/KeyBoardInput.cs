@@ -64,6 +64,7 @@ namespace DS
             Jump = _btnA.IsExtending && _btnA.OnPressed;
             Roll = _btnA.IsDelaying && _btnA.OnRelease;
             Attack = _btnC.OnPressed;
+            Defense = _btnD.IsPressing;
             LockOn = _btnB.OnPressed;
         }
 

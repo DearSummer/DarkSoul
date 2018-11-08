@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DS.Role
 {
-    public class HitState : IPlayerState {
+    public class DefenseState : IPlayerState {
 
 
         public void OnEnter(GameObject player, ActorController controller)
@@ -13,22 +13,19 @@ namespace DS.Role
 
         public void Update(PlayerInput inputSignal, Animator animator)
         {
-          
         }
 
         public void FixedUpdate(Rigidbody rigidbody)
         {
-           
         }
 
         public string GetStateName()
         {
-            return "HitState";
+            return "DefenseState";
         }
 
         public void OnExit()
         {
-            
         }
     }
 }

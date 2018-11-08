@@ -13,10 +13,12 @@ namespace DS.Role
             AddHP(hpMax);
         }
 
-        public void AddHP(int value)
+        public bool AddHP(int value)
         {
             hp += value;
             hp = Mathf.Clamp(hp, 0, hpMax);
+
+            return hp != 0;
         }
     }
 }

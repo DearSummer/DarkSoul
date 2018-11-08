@@ -6,6 +6,8 @@
 //  description:  
 //-------------------------------------------
 
+using System;
+
 namespace DS.Role.FSM
 {
     public interface IMachine
@@ -14,7 +16,7 @@ namespace DS.Role.FSM
         void FixUpdate();
         void TranslateTo(IPlayerState newPlayerState);
         IPlayerState GetCurrentState();
-
+        string GetCurrentStateName();
     }
 }
 

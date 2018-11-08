@@ -1,9 +1,9 @@
 ﻿using DS.Role.Interface;
 using UnityEngine;
 
-namespace DS.Role
+namespace DS.Role.Riko
 {
-    public class ActorManager : MonoBehaviour
+    public class RikoManager : MonoBehaviour
     {
         private WeaponManager _weaponManager;
         private BattleManager _battleManager;
@@ -21,10 +21,19 @@ namespace DS.Role
             _stateManager = BindManager<StateManager>(this.gameObject);
         }
 
-        public void GetHurt()
+        public void TryGetHurt()
         {
-            _stateManager.AddHP(-5);
-            _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
+
+            if (_actorController.GetCurrentState() == ProjectConstant.PlayerState.DEFENSE)
+                _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);
+            else if (_stateManager.AddHP(-5))
+                _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
+            else
+            {
+                _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.DIE);
+                _battleManager.Enable(false);
+            }
+
         }
 
 

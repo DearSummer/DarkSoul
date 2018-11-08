@@ -34,6 +34,12 @@ namespace DS
             get;
         }
 
+        public bool Defense
+        {
+            protected set;
+            get;
+        }
+
         public bool Magic
         {
             protected set;

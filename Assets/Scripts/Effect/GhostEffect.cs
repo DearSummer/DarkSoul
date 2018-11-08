@@ -56,7 +56,7 @@ namespace DS.Effect
                 MeshRenderer meshRenderer = ghost.GetComponent<MeshRenderer>();
                 if (meshRenderer == null)
                     meshRenderer = ghost.AddComponent<MeshRenderer>();
-                meshRenderer.material = skinnedMeshRenderer[i].material;
+                //meshRenderer.material = skinnedMeshRenderer[i].material;
                 meshRenderer.material = effectMaterial;
                 meshFilter.mesh = mesh;
                    

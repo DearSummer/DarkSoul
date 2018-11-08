@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using DS.Role.Riko;
+using UnityEngine;
 
 namespace DS.Role.Interface
 {
     public class IActorManager : MonoBehaviour
     {
-        protected ActorManager actorManager;
+        protected RikoManager RikoManager;
 
-        public void InitManager(ActorManager manager)
+        public void InitManager(RikoManager manager)
         {
-            actorManager = manager;
+            RikoManager = manager;
         }
     }
 }

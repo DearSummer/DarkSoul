@@ -57,6 +57,11 @@ namespace DS.Role
             }
         }
 
+        public string GetStateName()
+        {
+            return "AirState";
+        }
+
 
         /// <summary>
         /// ÍË³ö×´Ì¬Ê±ÖØÖÃ×´Ì¬

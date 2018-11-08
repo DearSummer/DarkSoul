@@ -9,6 +9,7 @@ namespace DS.Role
 
         private CapsuleCollider _collider;
 
+
         private void Awake()
         {
             _collider = GetComponent<CapsuleCollider>();
@@ -23,8 +24,13 @@ namespace DS.Role
         {
             if (other.CompareTag(ProjectConstant.Tag.WEAPON))
             {
-                actorManager.GetHurt();
+                RikoManager.TryGetHurt();
             }
+        }
+
+        public void Enable(bool enable)
+        {
+            _collider.enabled = enable;
         }
     }
 }

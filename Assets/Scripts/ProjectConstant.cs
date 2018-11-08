@@ -6,6 +6,8 @@
 //  description:  
 //-------------------------------------------
 
+using DS.Role;
+
 namespace DS
 {
     public static class ProjectConstant
@@ -34,6 +36,14 @@ namespace DS
             public static readonly string DIE = "die";
             public static readonly string RIGHT = "right";
             public static readonly string HIT = "hit";
+            public static readonly string DEFENSE = "defense";
+            public static readonly string BLOACKED = "blocked";
+        }
+
+        public class PlayerState
+        {
+            public static readonly string DEFENSE = "DefenseState";
+            public static readonly string DEATH = "DeathState";
         }
 
         public class AnimatorLayer
