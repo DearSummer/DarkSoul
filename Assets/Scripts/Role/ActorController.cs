@@ -190,6 +190,11 @@ namespace DS.Role
             _animator.SetTrigger(triggerName);
         }
 
+        public void IssueBool(string boolName)
+        {
+            _animator.SetBool(boolName, true);
+        }
+
         public string GetCurrentState()
         {
             return _machine.GetCurrentStateName();

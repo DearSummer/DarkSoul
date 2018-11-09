@@ -41,7 +41,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return "GroundState";
+            return ProjectConstant.PlayerState.GROUND;
         }
 
         public void OnExit()

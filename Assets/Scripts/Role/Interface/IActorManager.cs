@@ -5,11 +5,16 @@ namespace DS.Role.Interface
 {
     public class IActorManager : MonoBehaviour
     {
-        protected RikoManager RikoManager;
+        protected RikoManager actorManager;
 
         public void InitManager(RikoManager manager)
         {
-            RikoManager = manager;
+            this.actorManager = manager;
+        }
+
+        public RikoManager GetManager()
+        {
+            return actorManager;
         }
     }
 }

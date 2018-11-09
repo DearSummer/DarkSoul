@@ -24,7 +24,7 @@ namespace DS.Role
         {
             if (other.CompareTag(ProjectConstant.Tag.WEAPON))
             {
-                RikoManager.TryGetHurt();
+                actorManager.TryGetHurt(other.GetComponent<WeaponData>().damage);
             }
         }
 

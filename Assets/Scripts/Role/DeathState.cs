@@ -20,7 +20,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return "DeathState";
+            return ProjectConstant.PlayerState.DEATH;
         }
 
         public void OnExit()

@@ -21,16 +21,32 @@ namespace DS.Role.Riko
             _stateManager = BindManager<StateManager>(this.gameObject);
         }
 
-        public void TryGetHurt()
+        public string GetCurrentStateName()
+        {
+            return _actorController.GetCurrentState();
+        }
+
+        private void Update()
+        {
+            if (_stateManager.isCounterBackEnable && _actorController.InputSignal.Attack)
+            {
+                _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.COUNTER_BACK);
+            }
+
+        }
+
+        public void TryGetHurt(float damage)
         {
 
+            if (_stateManager.isImmortal || _stateManager.isDie)
+                return;
             if (_actorController.GetCurrentState() == ProjectConstant.PlayerState.DEFENSE)
                 _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);
-            else if (_stateManager.AddHP(-5))
+            else if (_stateManager.AddHP(-damage))
                 _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
             else
             {
-                _actorController.IssueTrigger(ProjectConstant.AnimatorParameter.DIE);
+                _actorController.IssueBool(ProjectConstant.AnimatorParameter.DIE);
                 _battleManager.Enable(false);
             }
 

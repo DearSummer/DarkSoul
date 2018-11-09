@@ -19,8 +19,7 @@ namespace DS
         }
 
         public class Layer
-        {
-        
+        {       
             public static readonly string GROUND = "Ground";
             public static readonly string ENEMY = "Enemy";
         }
@@ -38,12 +37,19 @@ namespace DS
             public static readonly string HIT = "hit";
             public static readonly string DEFENSE = "defense";
             public static readonly string BLOACKED = "blocked";
+            public static readonly string COUNTER_BACK = "counterBack";
         }
+
 
         public class PlayerState
         {
             public static readonly string DEFENSE = "DefenseState";
             public static readonly string DEATH = "DeathState";
+            public static readonly string HIT = "HitState";
+            public static readonly string ATTACK = "Attack";
+            public static readonly string GROUND = "GroundState";
+            public static readonly string JUMP = "AirState";
+            public static readonly string BLOCKED = "BlockedState";
         }
 
         public class AnimatorLayer

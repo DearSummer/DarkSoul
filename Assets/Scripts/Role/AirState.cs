@@ -59,7 +59,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return "AirState";
+            return ProjectConstant.PlayerState.JUMP;
         }
 
 

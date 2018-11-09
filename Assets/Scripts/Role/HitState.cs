@@ -23,7 +23,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return "HitState";
+            return ProjectConstant.PlayerState.HIT;
         }
 
         public void OnExit()

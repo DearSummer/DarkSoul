@@ -21,7 +21,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return "DefenseState";
+            return ProjectConstant.PlayerState.DEFENSE;
         }
 
         public void OnExit()

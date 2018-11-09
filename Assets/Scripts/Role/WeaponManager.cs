@@ -6,17 +6,17 @@ namespace DS.Role
     public class WeaponManager : IActorManager
     {
 
-        private WeaponHandler weaponHandler;
+        private WeaponData _weaponData;
         
         // Use this for initialization
         void Start ()
         {
-            weaponHandler = GetComponent<WeaponHandler>();
+            _weaponData = GetComponentInChildren<WeaponData>();
         }
-	
-        // Update is called once per frame
-        void Update () {
-		
+
+        public float GetDamage()
+        {
+            return _weaponData.damage;
         }
     }
 }

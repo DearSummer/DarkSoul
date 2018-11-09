@@ -1673,6 +1673,7 @@ GameObject:
   - component: {fileID: 244137157}
   - component: {fileID: 244137159}
   - component: {fileID: 244137158}
+  - component: {fileID: 244137160}
   m_Layer: 11
   m_Name: katana
   m_TagString: Weapon
@@ -1729,6 +1730,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &244137160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 244137156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d4bddeb6afe4947b46c551f72425ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &259280408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,6 +2461,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100070, guid: bf7c1748e2353e04f8a184d4f67aa731,
     type: 3}
   m_PrefabInternal: {fileID: 519864319}
+--- !u!114 &518870118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 518870117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53967aff6be5aa4ca27b0e97f9d0cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &518870119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400070, guid: bf7c1748e2353e04f8a184d4f67aa731,
@@ -4122,7 +4146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1012138047}
-  - component: {fileID: 1012138048}
   m_Layer: 0
   m_Name: WeaponHandlerR
   m_TagString: Untagged
@@ -4145,17 +4168,6 @@ Transform:
   m_Father: {fileID: 1952526386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1012138048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1012138046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d4bddeb6afe4947b46c551f72425ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1026564556
 GameObject:
   m_ObjectHideFlags: 0
@@ -9258,6 +9270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2032366598}
   - component: {fileID: 2032366599}
+  - component: {fileID: 2032366600}
   m_Layer: 11
   m_Name: Weapon
   m_TagString: Weapon
@@ -9291,6 +9304,18 @@ CapsuleCollider:
   m_Height: 1.39
   m_Direction: 0
   m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!114 &2032366600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2032366597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d4bddeb6afe4947b46c551f72425ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 12
 --- !u!1 &2037104489
 GameObject:
   m_ObjectHideFlags: 0
