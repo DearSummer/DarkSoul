@@ -96,7 +96,6 @@ namespace DS.Role
             if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
             {
                 _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
-                _machine.TranslateTo(_attackState);
             }
 
             if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
@@ -156,6 +155,11 @@ namespace DS.Role
         private void OnGroundEnter()
         {
             _machine.TranslateTo(_groundState);
+        }
+
+        private void OnAttackStateEnter()
+        {
+            _machine.TranslateTo(_attackState);
         }
 
         private void OnGround()

@@ -38,6 +38,7 @@ namespace DS
             public static readonly string DEFENSE = "defense";
             public static readonly string BLOACKED = "blocked";
             public static readonly string COUNTER_BACK = "counterBack";
+            public static readonly string STUNED = "stuned";
         }
 
 

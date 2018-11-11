@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DS.Role
 {
     [RequireComponent(typeof(CapsuleCollider))]
-    public class BattleManager : IActorManager
+    public class BattleManager : IActorStateManager
     {
 
         private CapsuleCollider _collider;
@@ -13,10 +13,10 @@ namespace DS.Role
         private void Awake()
         {
             _collider = GetComponent<CapsuleCollider>();
-            _collider.center = Vector3.up * 0.79f;
-            _collider.radius = 0.2f;
-            _collider.height = 1.58f;
-            _collider.isTrigger = true;
+//            _collider.center = Vector3.up * 0.79f;
+//            _collider.radius = 0.2f;
+//            _collider.height = 1.58f;
+//            _collider.isTrigger = true;
         }
 
 

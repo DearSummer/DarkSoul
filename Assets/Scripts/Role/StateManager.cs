@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DS.Role
 {
-    public class StateManager : IActorManager
+    public class StateManager : IActorStateManager
     {
 
         private Animator _anim;

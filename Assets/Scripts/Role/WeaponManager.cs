@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DS.Role
 {
-    public class WeaponManager : IActorManager
+    public class WeaponManager : IActorStateManager
     {
 
         private WeaponData _weaponData;
