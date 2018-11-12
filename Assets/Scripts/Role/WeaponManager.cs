@@ -9,14 +9,22 @@ namespace DS.Role
         private WeaponData _weaponData;
         
         // Use this for initialization
-        void Start ()
+        void Awake ()
         {
             _weaponData = GetComponentInChildren<WeaponData>();
+            _weaponData.Manager = this;
         }
 
         public float GetDamage()
         {
             return _weaponData.damage;
         }
+
+        public CapsuleCollider GetWeaponCollider()
+        {
+            return _weaponData.GetComponent<CapsuleCollider>();
+        }
+
+       
     }
 }

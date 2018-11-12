@@ -11,7 +11,7 @@ namespace DS.Role.Interface
             this.actorManager = manager;
         }
 
-        public IActorManager GetManager()
+        public IActorManager GetActorManager()
         {
             return actorManager;
         }

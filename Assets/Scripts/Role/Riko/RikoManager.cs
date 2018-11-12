@@ -1,27 +1,26 @@
 ﻿using DS.Role.Interface;
-using UnityEngine;
 
-namespace DS.Role
+namespace DS.Role.Riko
 {
-    public class ActorManager : IActorManager
+    public class RikoManager : IActorManager
     {
 
-        private void Update()
+
+        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
         {
-            if (stateManager.isCounterBackEnable && actorController.InputSignal.Attack)
+
+            if (stateManager.isCounterBackEnable && counterbackEnable)
             {
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.COUNTER_BACK);
+                wm.GetActorManager().Stuned();
+                return;
             }
 
-        }
-
-        public override void TryGetHurt(float damage)
-        {
             if (stateManager.isImmortal || stateManager.isDie)
                 return;
             if (actorController.GetCurrentState() == ProjectConstant.PlayerState.DEFENSE)
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);
-            else if (stateManager.AddHP(-damage))
+            else if (stateManager.AddHP(-wm.GetDamage()))
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
             else
             {

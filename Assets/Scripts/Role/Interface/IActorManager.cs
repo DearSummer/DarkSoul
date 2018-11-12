@@ -25,8 +25,13 @@ namespace DS.Role.Interface
             return actorController.GetCurrentState();
         }
 
+        public Vector3 GetForwardVec()
+        {
+            return actorController.player.transform.forward;
+        }
 
-        public virtual void TryGetHurt(float damage)
+
+        public virtual void TryGetHurt(WeaponManager wm, bool counterbackEnable)
         {
         }
 

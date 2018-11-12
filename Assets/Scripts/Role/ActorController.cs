@@ -76,7 +76,7 @@ namespace DS.Role
             _machine.Update();
         }
 
-        private void ActionHandler()
+        protected virtual void ActionHandler()
         {
             if (InputSignal.Roll || _rigidbody.velocity.magnitude > 8f)
             {

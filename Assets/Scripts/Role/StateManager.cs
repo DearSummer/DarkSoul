@@ -43,7 +43,7 @@ namespace DS.Role
             isCounterBack = CheckState("CounterBack");
             isBlocked = CheckState("blocked");
 
-            isCounterBackEnable = !isCounterBack && isBlocked;
+            isCounterBackEnable = !isCounterBack && isDefense;
             isImmortal = isRoll || isCounterBack;
             isAttackEnable = isOnGround && !isImmortal && !isDefense;
         }

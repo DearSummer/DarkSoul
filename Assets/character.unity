@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 169552963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 812d97a1d652a1d488785bec49fc94c7, type: 3}
+  m_Script: {fileID: 11500000, guid: fde16176694c2524cb6f4942648f4dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &169552966
@@ -7650,7 +7650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd49e30909fc634aaecdc9d9e9d144f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 15
+  hpMax: 100
   hp: 0
   isOnGround: 0
   isHit: 0

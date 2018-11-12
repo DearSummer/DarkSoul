@@ -8,8 +8,8 @@ namespace DS
         void Start ()
         {
             Attack = true;
-            targetUpValue = 1.0f;
-            targetCRightValue = 1.0f;
+            targetUpValue = 0.0f;
+            targetCRightValue = 0.0f;
         }
 	
         // Update is called once per frame
