@@ -22,6 +22,8 @@ namespace DS
         {       
             public static readonly string GROUND = "Ground";
             public static readonly string ENEMY = "Enemy";
+            public static readonly string HIT_SENOR = "HitSenor";
+            public static readonly string WEAPON = "Weapon";
         }
 
         public class AnimatorParameter

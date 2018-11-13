@@ -13,10 +13,9 @@ namespace DS.Role
         private void Awake()
         {
             _collider = GetComponent<CapsuleCollider>();
-//            _collider.center = Vector3.up * 0.79f;
-//            _collider.radius = 0.2f;
-//            _collider.height = 1.58f;
-//            _collider.isTrigger = true;
+            _collider.isTrigger = true;
+
+            this.gameObject.layer = LayerMask.NameToLayer(ProjectConstant.Layer.HIT_SENOR);
         }
 
 
@@ -42,7 +41,6 @@ namespace DS.Role
 
                 if (attackAngle < 45f)
                 {
-                    Debug.Log(receiverAngle);
                     actorManager.TryGetHurt(other.GetComponent<WeaponData>().Manager,
                         (receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20F));
                     wd.CloseWeaponCollider();
