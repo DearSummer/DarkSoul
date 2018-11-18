@@ -9,7 +9,7 @@ namespace DS.Role.Riko
         public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
         {
 
-            if (stateManager.isCounterBackEnable && counterbackEnable)
+            if (stateManager.isCounterBackEnable)
             {
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.COUNTER_BACK);
                 wm.GetActorManager().Stuned();

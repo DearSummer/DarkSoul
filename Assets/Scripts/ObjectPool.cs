@@ -4,31 +4,20 @@ using UnityEngine.Experimental.PlayerLoop;
 
 namespace DS
 {
-    public class ObjectPool
+    public class ObjectPool : Singleton<ObjectPool>
     {
         private int objCount = 0;
         public int ObjCount
         {
             get { return objCount; }
         }
-        private static ObjectPool mInstance = null;
-        public static ObjectPool Instance
-        {
-            get
-            {
-               if(mInstance == null)
-                   mInstance = new ObjectPool();
 
-                return mInstance;
-            }
-        }
 
         private readonly Dictionary<string, Queue<GameObject>> poolDic = new Dictionary<string, Queue<GameObject>>();
         private readonly Dictionary<GameObject,string> tagDic = new Dictionary<GameObject, string>();
 
         private GameObject pool;
 
-        private ObjectPool() { }
 
         public void Clear()
         {
@@ -60,7 +49,7 @@ namespace DS
                 return;
 
 
-            obj.transform.parent = pool.transform;
+            obj.transform.SetParent(pool.transform);
             obj.SetActive(false);
 
             string tag = tagDic[obj];
@@ -111,7 +100,7 @@ namespace DS
             {
                 GameObject obj = poolDic[tag].Dequeue();
                 obj.SetActive(true);
-                obj.transform.parent = null;
+                obj.transform.SetParent(null);
                 return obj;
             }
 

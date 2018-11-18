@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
+  - Particle
+  - ground
+  - DamageCanvas
   layers:
   - Default
   - TransparentFX

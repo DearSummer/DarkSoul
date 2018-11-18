@@ -16,6 +16,8 @@ namespace DS
         public class Tag
         {
             public static readonly string WEAPON = "Weapon";
+            public static readonly string DAMAGE_CANVAS = "DamageCanvas";
+            public static readonly string PLAYER = "Player";
         }
 
         public class Layer

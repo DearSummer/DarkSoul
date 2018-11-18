@@ -9,15 +9,27 @@ namespace DS.Role.Interface
         protected StateManager stateManager;
         protected ActorController actorController;
 
+        private float height;
+
+        public bool isPlayer;
+
         // Use this for initialization
-        void Start()
+        void Awake()
         {
             actorController = GetComponent<ActorController>();
+            height = GetComponent<CapsuleCollider>().height;
 
             GameObject hitSenor = transform.Find("HitSenor").gameObject;
             battleManager = BindManager<BattleManager>(hitSenor);
             weaponManager = BindManager<WeaponManager>(actorController.player);
             stateManager = BindManager<StateManager>(this.gameObject);
+
+            isPlayer = this.transform.tag.Equals(ProjectConstant.Tag.PLAYER);
+        }
+
+        public float GetCharacterHeight()
+        {
+            return height;
         }
 
         public string GetCurrentStateName()

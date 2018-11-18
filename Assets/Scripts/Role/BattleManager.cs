@@ -1,4 +1,6 @@
 ﻿using DS.Role.Interface;
+using DS.UI;
+using DS.Util;
 using UnityEngine;
 
 namespace DS.Role
@@ -41,10 +43,15 @@ namespace DS.Role
 
                 if (attackAngle < 45f)
                 {
-                    actorManager.TryGetHurt(other.GetComponent<WeaponData>().Manager,
+                    actorManager.TryGetHurt(wd.Manager,
                         (receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20F));
                     wd.CloseWeaponCollider();
-                    
+
+                    if (!actorManager.isPlayer)
+                        DamageUIManager.Instance.SetDamage((int) wd.damage,
+                            wd.Manager.GetActorManager().transform.position +
+                            Vector3.up * wd.Manager.GetActorManager().GetCharacterHeight());
+
                 }
 
             }

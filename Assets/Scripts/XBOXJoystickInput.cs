@@ -63,7 +63,7 @@ namespace DS
             targetUpValue = Input.GetAxis("Left Y Axis");
             targetRightValue = Input.GetAxis("Left X Axis");
 
-            targetCRightValue = Input.GetAxis("Right X Axis");
+            targetCRightValue = -Input.GetAxis("Right X Axis");
             targetCUpValue = Input.GetAxis("Right Y Axis");        
 
             _btnA.Tick(Input.GetKey(keyA));
