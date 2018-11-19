@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.25685295, g: 0.33042923, b: 0.49056602, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd236dd100a74504e9819bf5cb2671a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageText: {fileID: 0}
+  color: {r: 0.6236205, g: 0.6730232, b: 0.9245283, a: 1}
 --- !u!222 &222434358148954710
 CanvasRenderer:
   m_ObjectHideFlags: 1

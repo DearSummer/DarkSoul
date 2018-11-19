@@ -1,4 +1,5 @@
 using DS.Role;
+using DS.Role.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ namespace DS.Camera
 
         protected GameObject player;
         protected ActorController controller;
-
+  
         protected GameObject Camera;
 
         protected float eulerAngelX;

@@ -46,11 +46,10 @@ namespace DS.Role
                     actorManager.TryGetHurt(wd.Manager,
                         (receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20F));
                     wd.CloseWeaponCollider();
-
+                    
                     if (!actorManager.isPlayer)
                         DamageUIManager.Instance.SetDamage((int) wd.damage,
-                            wd.Manager.GetActorManager().transform.position +
-                            Vector3.up * wd.Manager.GetActorManager().GetCharacterHeight());
+                            _collider.ClosestPointOnBounds(other.transform.position));
 
                 }
 

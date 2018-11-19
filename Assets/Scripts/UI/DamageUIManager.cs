@@ -9,6 +9,8 @@ namespace DS.UI
 
         public float aliveTime;
 
+        private Color damageColor = ColorSet.normalColor;
+
 
         private void Start()
         {
@@ -16,6 +18,10 @@ namespace DS.UI
                 canvas = GameObject.FindWithTag(ProjectConstant.Tag.DAMAGE_CANVAS);
         }
 
+        public void SetColor(Color color)
+        {
+            damageColor = color;
+        }
 
         public void SetDamage(int damage,Vector3 pos)
         {
@@ -25,6 +31,7 @@ namespace DS.UI
             DamageText dt = text.GetComponent<DamageText>();
             dt.SetText(damage);
             dt.SetAliveTime(aliveTime);
+            dt.color = damageColor;
 
             text.transform.position = UnityEngine.Camera.main.WorldToScreenPoint(pos);
 

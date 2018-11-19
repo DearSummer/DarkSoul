@@ -5,7 +5,8 @@ namespace DS.UI
 {
     public class DamageText : MonoBehaviour
     {
-        [SerializeField]
+        public Color color;
+
         private Text damageText;
         private CanvasGroup canvasGroup;
 
@@ -56,6 +57,7 @@ namespace DS.UI
                 init();
             }
             damageText.text = damage.ToString();
+            damageText.color = color;
         }
 
         public void SetAliveTime(float aliveTime)

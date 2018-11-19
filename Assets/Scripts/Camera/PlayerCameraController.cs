@@ -1,4 +1,5 @@
 ﻿using DS.Role;
+using DS.Role.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,9 @@ namespace DS.Camera
         void Awake()
         {
             controller = GetComponentInParent<ActorController>();
+    
             player = controller.player;
+
 
             Camera = UnityEngine.Camera.main.gameObject;
             Cursor.lockState = CursorLockMode.Locked;
