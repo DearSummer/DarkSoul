@@ -193,21 +193,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.33608815
         functionName: ResetAttackCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.83966196
+      - time: 0.51459306
         functionName: ResetAttackTrigger
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.83974314
+      - time: 0.51467425
         functionName: CloseAttackCollider
         data: 
         objectReferenceParameter: {instanceID: 0}

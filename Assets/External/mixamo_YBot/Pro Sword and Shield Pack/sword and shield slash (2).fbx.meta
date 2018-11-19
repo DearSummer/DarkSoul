@@ -193,7 +193,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.48209366
         functionName: ResetAttackCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -207,7 +207,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5177111
+      - time: 0.61137503
         functionName: CloseAttackCollider
         data: 
         objectReferenceParameter: {instanceID: 0}

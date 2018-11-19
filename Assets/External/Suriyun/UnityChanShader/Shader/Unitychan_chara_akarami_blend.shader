@@ -28,12 +28,11 @@ Shader "UnityChan/Blush - Transparent"
 			ZTest LEqual
 CGPROGRAM
 #pragma multi_compile_fwdbase
-#pragma target 3.0
 #pragma vertex vert
 #pragma fragment frag
 #include "UnityCG.cginc"
 #include "AutoLight.cginc"
-#include "CharaSkin.cginc"
+#include "CharaSkin.cg"
 ENDCG
 		}
 	}

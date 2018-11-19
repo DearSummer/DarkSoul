@@ -1,4 +1,5 @@
-﻿using DS.Role.Interface;
+﻿using DS.Effect;
+using DS.Role.Interface;
 using DS.UI;
 using DS.Util;
 using UnityEngine;
@@ -10,8 +11,7 @@ namespace DS.Role
     {
 
         private CapsuleCollider _collider;
-
-
+ 
         private void Awake()
         {
             _collider = GetComponent<CapsuleCollider>();
@@ -46,10 +46,16 @@ namespace DS.Role
                     actorManager.TryGetHurt(wd.Manager,
                         (receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20F));
                     wd.CloseWeaponCollider();
-                    
+
                     if (!actorManager.isPlayer)
-                        DamageUIManager.Instance.SetDamage((int) wd.damage,
-                            _collider.ClosestPointOnBounds(other.transform.position));
+                    {
+                        Vector3 pos = _collider.ClosestPointOnBounds(other.transform.position);
+
+                        DamageUIManager.Instance.SetDamage((int) wd.damage, pos);
+                        FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
+
+                    }
+
 
                 }
 

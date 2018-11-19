@@ -6019,7 +6019,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1012138046}
   m_LocalRotation: {x: -0.00017807531, y: 0.016984351, z: -0.010477886, w: 0.99980086}
-  m_LocalPosition: {x: -0.066, y: -0.002, z: -0.049}
+  m_LocalPosition: {x: -0.065, y: -0.002, z: -0.023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 244137157}
@@ -7218,7 +7218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8505343bcb11fd45b391e28cfc8174c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openGhostEffect: 1
+  openGhostEffect: 0
   survivalTime: 1
   intervalTime: 0.2
   effectMaterial: {fileID: 2100000, guid: 4ba6872ffc69a24499eda0de7894b044, type: 2}
@@ -9702,6 +9702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1665300957}
   - component: {fileID: 1665300956}
+  - component: {fileID: 1665300958}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -9735,6 +9736,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1665300958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665300955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500a3fea3abe98a4cbf2fb144e757cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectArray:
+  - {fileID: 1008842686038376, guid: 42c427f9d12527f4b86f4e770b4ce034, type: 2}
+  - {fileID: 1931391723872664, guid: 8690041cf7250174eb66ceb76d6bf32a, type: 2}
 --- !u!1 &1669392723
 GameObject:
   m_ObjectHideFlags: 0
