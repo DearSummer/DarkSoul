@@ -12,6 +12,7 @@ namespace DS.Role
     {
         private Animator animator;
         private CapsuleCollider _attackCollider;
+
         // Use this for initialization
         void Awake()
         {

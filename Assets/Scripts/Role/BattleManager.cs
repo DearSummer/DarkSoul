@@ -46,14 +46,16 @@ namespace DS.Role
                     actorManager.TryGetHurt(wd.Manager,
                         (receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20F));
                     wd.CloseWeaponCollider();
+                    Vector3 pos = _collider.ClosestPointOnBounds(other.transform.position);
 
                     if (!actorManager.isPlayer)
-                    {
-                        Vector3 pos = _collider.ClosestPointOnBounds(other.transform.position);
-
+                    {                      
                         DamageUIManager.Instance.SetDamage((int) wd.damage, pos);
-                        FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
-
+                        FightingParticleManager.Instance.ShowEffect(wd.GetEffectIndex(), pos);              
+                    }
+                    else
+                    {
+                        FightingParticleManager.Instance.ShowEffect(wd.GetEffectIndex(),pos);
                     }
 
 

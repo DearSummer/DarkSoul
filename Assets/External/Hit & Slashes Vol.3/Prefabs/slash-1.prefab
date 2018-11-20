@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 4492048870036804}
   - component: {fileID: 198587545500424504}
   - component: {fileID: 199516274434461744}
-  - component: {fileID: 114697409501510656}
   m_Layer: 0
   m_Name: slash-1
   m_TagString: Untagged
@@ -166,18 +165,6 @@ Transform:
   m_Father: {fileID: 4492048870036804}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114697409501510656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1840170968027002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5a92ec89de1aec4281ea738f0693ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfdestruct_in: 1.11
 --- !u!198 &198010234419191586
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -5002,7 +4989,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6.283185
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2

@@ -7,6 +7,10 @@ namespace DS.Role
     {
         private CapsuleCollider weaponCollider;
         public float damage;
+        
+        
+        public int effectIndexMin;
+        public int effectIndexMax;
 
         public WeaponManager Manager { get; set; }
         // Use this for initialization
@@ -17,11 +21,18 @@ namespace DS.Role
 
             this.gameObject.tag = ProjectConstant.Tag.WEAPON;
             this.gameObject.layer = LayerMask.NameToLayer(ProjectConstant.Layer.WEAPON);
+
+            CloseWeaponCollider();
         }
 
         public void CloseWeaponCollider()
         {
             weaponCollider.enabled = false;
+        }
+
+        public int GetEffectIndex()
+        {
+            return Random.Range(effectIndexMin, effectIndexMax);
         }
 
     }

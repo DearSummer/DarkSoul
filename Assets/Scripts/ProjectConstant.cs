@@ -6,8 +6,6 @@
 //  description:  
 //-------------------------------------------
 
-using DS.Role;
-
 namespace DS
 {
     public static class ProjectConstant
@@ -43,6 +41,7 @@ namespace DS
             public static readonly string BLOACKED = "blocked";
             public static readonly string COUNTER_BACK = "counterBack";
             public static readonly string STUNED = "stuned";
+            public static readonly string DRAW_WEAPON = "draw";
         }
 
 
@@ -60,7 +59,7 @@ namespace DS
         public class AnimatorLayer
         {
             public static readonly string BASE = "Base";
-           
+
         }
 
 

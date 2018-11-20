@@ -42,10 +42,11 @@ namespace DS.Role
             isOnGround = _anim.GetBool(ProjectConstant.AnimatorParameter.ON_GROUND);
             isCounterBack = CheckState("CounterBack");
             isBlocked = CheckState("blocked");
-
+   
             isCounterBackEnable = !isCounterBack && isDefense && _anim.GetBool("attack");
             isImmortal = isRoll || isCounterBack;
             isAttackEnable = isOnGround && !isImmortal && !isDefense;
+           
         }
 
         public bool AddHP(float value)

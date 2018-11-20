@@ -44,7 +44,8 @@ namespace DS.Role
         private readonly IPlayerState _hitState = new HitState();
         private readonly IPlayerState _defenseState = new DefenseState();
         private readonly IPlayerState _deathState = new DeathState();
-  
+
+        private bool isDrawWeapon = false;
 
         // Use this for initialization
         void Awake()
@@ -93,9 +94,14 @@ namespace DS.Role
                 _machine.TranslateTo(_airState);
             }
 
-            if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
+            if (InputSignal.Attack && _machine.GetCurrentState() != _airState && isDrawWeapon)
             {
                 _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
+            }
+            else if (InputSignal.Attack && !isDrawWeapon)
+            {
+                isDrawWeapon = true;
+                _animator.SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, isDrawWeapon);
             }
 
             if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
@@ -178,6 +184,8 @@ namespace DS.Role
         {
             _machine.TranslateTo(_hitState);
         }
+
+
 
         private void AnimatorMove(object movePos)
         {
