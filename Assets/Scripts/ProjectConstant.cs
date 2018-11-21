@@ -42,6 +42,7 @@ namespace DS
             public static readonly string COUNTER_BACK = "counterBack";
             public static readonly string STUNED = "stuned";
             public static readonly string DRAW_WEAPON = "draw";
+            public static readonly string BACK_STAB = "backStab";
         }
 
 
@@ -54,6 +55,7 @@ namespace DS
             public static readonly string GROUND = "GroundState";
             public static readonly string JUMP = "AirState";
             public static readonly string BLOCKED = "BlockedState";
+            public static readonly string DRAW_WEAPON = "DrawWeapon";
         }
 
         public class AnimatorLayer

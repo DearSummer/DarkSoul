@@ -1,6 +1,8 @@
 using System;
 using DS.Camera;
 using DS.Role.FSM;
+using DS.Role.Interface;
+using DS.Util;
 using UnityEngine;
 
 
@@ -45,7 +47,6 @@ namespace DS.Role
         private readonly IPlayerState _defenseState = new DefenseState();
         private readonly IPlayerState _deathState = new DeathState();
 
-        private bool isDrawWeapon = false;
 
         // Use this for initialization
         void Awake()
@@ -94,20 +95,19 @@ namespace DS.Role
                 _machine.TranslateTo(_airState);
             }
 
-            if (InputSignal.Attack && _machine.GetCurrentState() != _airState && isDrawWeapon)
+            if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
             {
-                _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
-            }
-            else if (InputSignal.Attack && !isDrawWeapon)
-            {
-                isDrawWeapon = true;
-                _animator.SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, isDrawWeapon);
+                if (CheckHasEnemyOnFace())
+                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.BACK_STAB);
+                else
+                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
             }
 
             if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
             {
                 _animator.SetTrigger(ProjectConstant.AnimatorParameter.DEFENSE);
             }
+
         }
 
 
@@ -148,6 +148,37 @@ namespace DS.Role
             }
         }
 
+        /// <summary>
+        /// 检测脸上是否有敌人
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckHasEnemyOnFace()
+        {
+
+            
+            Vector3 pos0 = this.transform.position + Vector3.up * _capsuleCollider.height / 2;
+            Vector3 pos1 = this.transform.position + Vector3.up * _capsuleCollider.height / 2 +
+                           this.transform.forward * 1.3f;
+
+            Collider[] outputColliders = Physics.OverlapCapsule(pos0, pos1, _capsuleCollider.radius,
+                LayerMask.GetMask(ProjectConstant.Layer.ENEMY));
+   
+            for (int i = 0; i < outputColliders.Length; i++)
+            {
+                if(outputColliders[i].gameObject.Equals(this.gameObject))
+                    continue;
+                Debug.Log(outputColliders[i].name);
+                if (PostionUtil.IsInEnemyBack(GetComponent<IActorManager>(),
+                    outputColliders[i].GetComponent<IActorManager>()
+                ))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void OnDeathStateEnter()
         {
             _machine.TranslateTo(_deathState);
@@ -185,6 +216,10 @@ namespace DS.Role
             _machine.TranslateTo(_hitState);
         }
 
+        private void OnDrawWeaponEnter()
+        {
+            _animator.SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, true);
+        }
 
 
         private void AnimatorMove(object movePos)

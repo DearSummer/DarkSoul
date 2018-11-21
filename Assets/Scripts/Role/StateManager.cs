@@ -26,6 +26,7 @@ namespace DS.Role
         public bool isImmortal;
         public bool isAttackEnable;
 
+
         private void Start()
         {
             _anim = GetComponentInChildren<Animator>();

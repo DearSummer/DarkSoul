@@ -4,7 +4,10 @@ namespace DS.Role.Riko
 {
     public class RikoManager : IActorManager
     {
-
+        private void Start()
+        {
+            weaponManager.HideWeapon();
+        }
 
         public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
         {
@@ -15,6 +18,7 @@ namespace DS.Role.Riko
                 wm.GetActorManager().Stuned();
                 return;
             }
+
 
             if (stateManager.isImmortal || stateManager.isDie)
                 return;
@@ -29,6 +33,8 @@ namespace DS.Role.Riko
             }
 
         }
+
+
 
     }
 }

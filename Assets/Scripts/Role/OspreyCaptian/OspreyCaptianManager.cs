@@ -8,7 +8,6 @@ namespace DS.Role.OspreyCaptian
 
         public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
         {
-           
         }
     }
 }

@@ -52,6 +52,11 @@ namespace DS.Role.Interface
             actorController.IssueTrigger(ProjectConstant.AnimatorParameter.STUNED);
         }
 
+        public virtual void BackStab()
+        {
+            actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BACK_STAB);
+        }
+
         protected T BindManager<T>(GameObject _where) where T : IActorStateManager
         {
             T manager = _where.GetComponent<T>();

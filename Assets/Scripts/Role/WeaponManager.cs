@@ -15,9 +15,19 @@ namespace DS.Role
             _weaponData.Manager = this;
         }
 
+        public void HideWeapon()
+        {
+            _weaponData.gameObject.SetActive(false);
+        }
+
+        public void DisplayWeapon()
+        {
+            _weaponData.gameObject.SetActive(true);
+        }
+
         public float GetDamage()
         {
-            return _weaponData.damage;
+            return _weaponData.Damage;
         }
 
         public CapsuleCollider GetWeaponCollider()

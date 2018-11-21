@@ -1,3 +1,4 @@
+using DS.Effect;
 using UnityEngine;
 
 
@@ -39,6 +40,10 @@ namespace DS.Role
             _attackCollider.enabled = false;
         }
 
+        private void ShowSword()
+        {
+            GetComponent<WeaponManager>().DisplayWeapon();
+        }
 
 
     }

@@ -6,8 +6,14 @@ namespace DS.Role
     public class WeaponData : MonoBehaviour
     {
         private CapsuleCollider weaponCollider;
-        public float damage;
-        
+
+        [SerializeField]
+        private float damage;
+        public float Damage
+        {
+            set { damage = value; }
+            get { return Random.Range(-3, 3) + damage; }
+        }
         
         public int effectIndexMin;
         public int effectIndexMax;
