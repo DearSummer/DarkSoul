@@ -51,10 +51,18 @@ namespace DS.Role
                     Vector3 pos = _collider.ClosestPointOnBounds(other.transform.position);
 
                     if (!actorManager.isPlayer)
-                    {                      
-                        DamageUIManager.Instance.SetDamage((int) wd.Damage, pos);
-                        FightingParticleManager.Instance.ShowEffect(wd.GetEffectIndex(), pos);              
+                    {
+                        DamageUIManager.Instance.SetDamage((int) wd.Manager.GetDamage(), pos,
+                            wd.Manager.IsCrit ? ColorSet.critColor : ColorSet.normalColor);
+
+                        if (wd.Manager.IsCrit)
+                        {
+                            FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
+                        }
+
                     }
+
+                    wd.Manager.IsCrit = false;
 
                 }
 

@@ -1,4 +1,5 @@
-﻿using DS.Role.Interface;
+﻿using DS.Role;
+using DS.Role.Interface;
 using UnityEngine;
 
 namespace DS.Util
@@ -29,7 +30,9 @@ namespace DS.Util
             float arAngle = Vector3.Angle(attackerDir, receiverDir);
 
             if (attackerAngle < 45f)
-                return receiverAngle > 135f && Mathf.Abs(arAngle - 180) < 20f;
+                return receiverAngle > 135f && Mathf.Abs(arAngle - 180) < 10f;
+
+
 
             return false;
         }

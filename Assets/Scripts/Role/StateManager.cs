@@ -1,4 +1,5 @@
 ﻿using DS.Role.Interface;
+using DS.UI;
 using UnityEngine;
 
 namespace DS.Role
@@ -11,21 +12,27 @@ namespace DS.Role
         public int hpMax;
         public float hp;
 
-        [Header("1st state flag")]
-        public bool isOnGround;
-        public bool isHit;
-        public bool isAttack;
+        public float toughness;
+
+        private bool isOnGround;
+        private bool isHit;
+        private bool isAttack;     
+        private bool isRoll;
+        private bool isDefense;
+        private bool isCounterBack;
+        private bool isBlocked;
         public bool isDie;
-        public bool isRoll;
-        public bool isDefense;
-        public bool isCounterBack;
-        public bool isBlocked;
 
         [Header("2rd state flag")]
         public bool isCounterBackEnable;
         public bool isImmortal;
         public bool isAttackEnable;
+        public bool isStuned;
 
+        public UnitFrame unitUI;
+
+        private float stunedTime;
+        private float stunedTimer;
 
         private void Start()
         {
@@ -47,7 +54,25 @@ namespace DS.Role
             isCounterBackEnable = !isCounterBack && isDefense && _anim.GetBool("attack");
             isImmortal = isRoll || isCounterBack;
             isAttackEnable = isOnGround && !isImmortal && !isDefense;
-           
+
+            if (isStuned && actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.STUNED)
+            {
+                stunedTimer += Time.deltaTime;
+                if (stunedTimer > stunedTime)
+                {
+                    actorManager.StaffStunedEnd();
+                    isStuned = false;
+                }
+
+            }
+            
+        }
+
+        public void StaffStuned(float time)
+        {
+            isStuned = true;
+            stunedTime = time - time * (toughness / (toughness + 20));
+            stunedTimer = 0f;
         }
 
         public bool AddHP(float value)
@@ -55,6 +80,8 @@ namespace DS.Role
             hp += value;
             hp = Mathf.Clamp(hp, 0, hpMax);
 
+            if (unitUI != null)
+                unitUI.SetPrimary(hp / hpMax);
             return hp > 0;
         }
 

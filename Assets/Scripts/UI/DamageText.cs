@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 namespace DS.UI
 {
@@ -16,10 +17,20 @@ namespace DS.UI
         private float a;
         private float b;
 
+        private Vector3 scale = Vector3.zero;
+
         // Use this for initialization
         void Start()
         {
             init();
+        }
+
+        private void OnEnable()
+        {
+            if (scale == Vector3.zero)
+                return;
+
+            this.transform.localScale = scale;
         }
 
         /*
@@ -70,6 +81,9 @@ namespace DS.UI
 
         private void OnDisable()
         {
+            if (scale == Vector3.zero)
+                scale = this.transform.localScale;
+
             damageText.text = "";
             timer = 0f;
             canvasGroup.alpha = 1;

@@ -52,10 +52,14 @@ namespace DS.Role.Interface
             actorController.IssueTrigger(ProjectConstant.AnimatorParameter.STUNED);
         }
 
-        public virtual void BackStab()
+
+        public void StaffStunedEnd()
         {
-            actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BACK_STAB);
+            actorController.IssueBool(ProjectConstant.AnimatorParameter.STAFF_STUNED, false);
         }
+
+
+
 
         protected T BindManager<T>(GameObject _where) where T : IActorStateManager
         {

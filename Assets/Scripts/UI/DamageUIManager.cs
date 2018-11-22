@@ -9,29 +9,23 @@ namespace DS.UI
 
         public float aliveTime;
 
-        private Color damageColor = ColorSet.normalColor;
-
-
         private void Start()
         {
             if (canvas == null)
                 canvas = GameObject.FindWithTag(ProjectConstant.Tag.DAMAGE_CANVAS);
         }
 
-        public void SetColor(Color color)
-        {
-            damageColor = color;
-        }
 
-        public void SetDamage(int damage,Vector3 pos)
+
+        public void SetDamage(int damage,Vector3 pos,Color color)
         {
             GameObject text = ObjectPool.Instance.Get(damageText);
             text.transform.SetParent(canvas.transform, false);
 
-            DamageText dt = text.GetComponent<DamageText>();
-            dt.SetText(damage);
+            DamageText dt = text.GetComponent<DamageText>();      
             dt.SetAliveTime(aliveTime);
-            dt.color = damageColor;
+            dt.color = color;
+            dt.SetText(damage);
 
             text.transform.position = UnityEngine.Camera.main.WorldToScreenPoint(pos);
 

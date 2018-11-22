@@ -13,6 +13,7 @@ namespace DS.Role
     {
         private Animator animator;
         private CapsuleCollider _attackCollider;
+        private WeaponManager _weaponManger;
 
         // Use this for initialization
         void Awake()
@@ -22,7 +23,8 @@ namespace DS.Role
 
         private void Start()
         {
-            _attackCollider = GetComponent<WeaponManager>().GetWeaponCollider();
+            _weaponManger = GetComponent<WeaponManager>();
+            _attackCollider = _weaponManger.GetWeaponCollider();
         }
 
         private void ResetAttackTrigger()
@@ -42,9 +44,15 @@ namespace DS.Role
 
         private void ShowSword()
         {
-            GetComponent<WeaponManager>().DisplayWeapon();
+            _weaponManger.DisplayWeapon();
         }
 
+        private void BackStab()
+        {
+            ResetAttackCollider();
+            
+            _weaponManger.IsCrit = true;
+        }
 
     }
 }

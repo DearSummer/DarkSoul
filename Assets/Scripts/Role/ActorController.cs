@@ -46,7 +46,7 @@ namespace DS.Role
         private readonly IPlayerState _hitState = new HitState();
         private readonly IPlayerState _defenseState = new DefenseState();
         private readonly IPlayerState _deathState = new DeathState();
-
+        private readonly IPlayerState _stunedState = new StunedState();
 
         // Use this for initialization
         void Awake()
@@ -97,10 +97,9 @@ namespace DS.Role
 
             if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
             {
-                if (CheckHasEnemyOnFace())
-                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.BACK_STAB);
-                else
-                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
+                _animator.SetTrigger(CheckHasEnemyOnFace()
+                    ? ProjectConstant.AnimatorParameter.BACK_STAB
+                    : ProjectConstant.AnimatorParameter.ATTACK);
             }
 
             if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
@@ -154,8 +153,9 @@ namespace DS.Role
         /// <returns></returns>
         private bool CheckHasEnemyOnFace()
         {
+            if (gameObject.layer == LayerMask.GetMask(ProjectConstant.Layer.ENEMY))
+                return false;
 
-            
             Vector3 pos0 = this.transform.position + Vector3.up * _capsuleCollider.height / 2;
             Vector3 pos1 = this.transform.position + Vector3.up * _capsuleCollider.height / 2 +
                            this.transform.forward * 1.3f;
@@ -167,7 +167,7 @@ namespace DS.Role
             {
                 if(outputColliders[i].gameObject.Equals(this.gameObject))
                     continue;
-                Debug.Log(outputColliders[i].name);
+
                 if (PostionUtil.IsInEnemyBack(GetComponent<IActorManager>(),
                     outputColliders[i].GetComponent<IActorManager>()
                 ))
@@ -216,11 +216,15 @@ namespace DS.Role
             _machine.TranslateTo(_hitState);
         }
 
+        private void OnStunedStateEnter()
+        {
+            _machine.TranslateTo(_stunedState);
+        }
+
         private void OnDrawWeaponEnter()
         {
             _animator.SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, true);
-        }
-
+        }    
 
         private void AnimatorMove(object movePos)
         {
@@ -237,9 +241,9 @@ namespace DS.Role
             _animator.SetTrigger(triggerName);
         }
 
-        public void IssueBool(string boolName)
+        public void IssueBool(string boolName,bool b = true)
         {
-            _animator.SetBool(boolName, true);
+            _animator.SetBool(boolName, b);
         }
 
         public string GetCurrentState()

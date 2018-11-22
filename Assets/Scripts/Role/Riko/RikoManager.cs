@@ -18,7 +18,7 @@ namespace DS.Role.Riko
                 wm.GetActorManager().Stuned();
                 return;
             }
-
+    
 
             if (stateManager.isImmortal || stateManager.isDie)
                 return;

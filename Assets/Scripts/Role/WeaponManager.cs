@@ -7,12 +7,20 @@ namespace DS.Role
     {
 
         private WeaponData _weaponData;
+
+        public bool IsCrit
+        {
+            get;
+            set;
+        }
         
         // Use this for initialization
         void Awake ()
         {
             _weaponData = GetComponentInChildren<WeaponData>();
             _weaponData.Manager = this;
+
+            IsCrit = false;
         }
 
         public void HideWeapon()
@@ -27,7 +35,14 @@ namespace DS.Role
 
         public float GetDamage()
         {
-            return _weaponData.Damage;
+            if (!IsCrit)
+            {
+                if (_weaponData.critRate > Random.Range(0f, 1f))
+                {
+                    IsCrit = true;
+                }
+            }
+            return _weaponData.Damage * (IsCrit ? 2 : 1);
         }
 
         public CapsuleCollider GetWeaponCollider()

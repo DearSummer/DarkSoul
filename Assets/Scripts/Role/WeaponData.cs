@@ -14,9 +14,10 @@ namespace DS.Role
             set { damage = value; }
             get { return Random.Range(-3, 3) + damage; }
         }
-        
-        public int effectIndexMin;
-        public int effectIndexMax;
+
+        [Range(0, 1)]
+        public float critRate;
+        public GameObject effect;
 
         public WeaponManager Manager { get; set; }
         // Use this for initialization
@@ -36,9 +37,9 @@ namespace DS.Role
             weaponCollider.enabled = false;
         }
 
-        public int GetEffectIndex()
+        public GameObject GetEffect()
         {
-            return Random.Range(effectIndexMin, effectIndexMax);
+            return effect;
         }
 
     }

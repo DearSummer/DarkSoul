@@ -11,6 +11,7 @@ namespace DS.Role
 {
     public class AttackState : IPlayerState
     {
+        private bool isStubBack;
 
         public void OnEnter(GameObject player, ActorController controller)
         {
@@ -19,6 +20,7 @@ namespace DS.Role
 
         public void Update(PlayerInput inputSignal, Animator animator)
         {
+            isStubBack = animator.GetCurrentAnimatorStateInfo(0).IsName("BACK_STAB");
         }
 
         public void FixedUpdate(Rigidbody rigidbody)
@@ -27,7 +29,7 @@ namespace DS.Role
 
         public string GetStateName()
         {
-            return ProjectConstant.PlayerState.ATTACK;
+            return isStubBack ? ProjectConstant.PlayerState.BACK_STAB : ProjectConstant.PlayerState.ATTACK;
         }
 
         public void OnExit()
