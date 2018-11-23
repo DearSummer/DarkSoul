@@ -36,7 +36,7 @@ namespace DS.Role
 
         public void FixedUpdate(Rigidbody rigidbody)
         {       
-            rigidbody.velocity = new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z);
+            rigidbody.transform.position += new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z) * Time.deltaTime;
         }
 
         public string GetStateName()

@@ -11,6 +11,8 @@ namespace DS.Util
             return postion + Vector3.up * collider.height / 2;
         }
 
+
+
         public static bool IsInEnemyBack(IActorManager attacker, IActorManager receiver)
         {
             if (attacker == null || receiver == null)
@@ -31,8 +33,6 @@ namespace DS.Util
 
             if (attackerAngle < 45f)
                 return receiverAngle > 135f && Mathf.Abs(arAngle - 180) < 10f;
-
-
 
             return false;
         }

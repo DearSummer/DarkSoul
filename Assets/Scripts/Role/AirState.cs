@@ -16,19 +16,17 @@ namespace DS.Role
 
         private bool _isOnGround = false;
 
-        private ActorController _actor;
         private float _checkTime = 0.5f;
         private float _timer = 0f;
 
         public void OnEnter(GameObject player, ActorController controller)
         {
-            var input = player.GetComponentInParent<KeyBoardInput>();
+            var input = player.GetComponentInParent<PlayerInput>();
             _movingVec = input.SignalValueMagic * player.transform.forward *
                          (input.Run ? controller.runVelocity : controller.moveVelocity);
 
             _jumpVec = new Vector3(0, controller.jumpVelocity, 0);
 
-            _actor = controller;
         }
 
         public void Update(PlayerInput inputSignal, Animator animator)

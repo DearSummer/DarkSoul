@@ -60,9 +60,9 @@ namespace DS
 
         private void HandleAction()
         {
-            Run = (!_btnA.IsDelaying && _btnA.IsPressing) || _btnA.IsExtending;
+            Run = (!_btnA.IsDelaying && _btnA.IsPressing);
             Jump = _btnA.IsExtending && _btnA.OnPressed;
-            Roll = _btnA.IsDelaying && _btnA.OnRelease;
+            Roll = _btnA.IsDelaying && (_btnA.OnRelease || _btnA.IsExtending);
             Attack = _btnC.OnPressed;
             Defense = _btnD.IsPressing;
             LockOn = _btnB.OnPressed;

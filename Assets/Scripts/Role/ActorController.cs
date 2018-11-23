@@ -47,6 +47,7 @@ namespace DS.Role
         private readonly IPlayerState _defenseState = new DefenseState();
         private readonly IPlayerState _deathState = new DeathState();
         private readonly IPlayerState _stunedState = new StunedState();
+        private readonly IPlayerState _drawWeaponState = new DrawWeaponState();
 
         // Use this for initialization
         void Awake()
@@ -97,9 +98,17 @@ namespace DS.Role
 
             if (InputSignal.Attack && _machine.GetCurrentState() != _airState)
             {
-                _animator.SetTrigger(CheckHasEnemyOnFace()
-                    ? ProjectConstant.AnimatorParameter.BACK_STAB
-                    : ProjectConstant.AnimatorParameter.ATTACK);
+                GameObject enemy;
+                if ((enemy = CheckHasEnemyOnFace()) != null &&
+                    enemy.GetComponent<IEnemyActorManager>().BackStabEnable())
+                {
+                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.BACK_STAB);
+                }
+                else
+                {
+                    _animator.SetTrigger(ProjectConstant.AnimatorParameter.ATTACK);
+                }
+
             }
 
             if (InputSignal.Defense  && _machine.GetCurrentState() == _attackState )
@@ -151,10 +160,10 @@ namespace DS.Role
         /// 检测脸上是否有敌人
         /// </summary>
         /// <returns></returns>
-        private bool CheckHasEnemyOnFace()
+        private GameObject CheckHasEnemyOnFace()
         {
             if (gameObject.layer == LayerMask.GetMask(ProjectConstant.Layer.ENEMY))
-                return false;
+                return null;
 
             Vector3 pos0 = this.transform.position + Vector3.up * _capsuleCollider.height / 2;
             Vector3 pos1 = this.transform.position + Vector3.up * _capsuleCollider.height / 2 +
@@ -172,11 +181,11 @@ namespace DS.Role
                     outputColliders[i].GetComponent<IActorManager>()
                 ))
                 {
-                    return true;
+                    return outputColliders[i].gameObject;
                 }
             }
 
-            return false;
+            return null;
         }
 
         private void OnDeathStateEnter()
@@ -223,7 +232,7 @@ namespace DS.Role
 
         private void OnDrawWeaponEnter()
         {
-            _animator.SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, true);
+            _machine.TranslateTo(_drawWeaponState);
         }    
 
         private void AnimatorMove(object movePos)

@@ -28,6 +28,7 @@ namespace DS.Role
         public bool isImmortal;
         public bool isAttackEnable;
         public bool isStuned;
+        public bool backStabEnable;
 
         public UnitFrame unitUI;
 
@@ -45,15 +46,16 @@ namespace DS.Role
             isDie = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.DEATH;
             isAttack = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.ATTACK;
             isDefense = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.DEFENSE;
-            isRoll = CheckState("Roll");
+            isRoll = CheckState("roll");
             isHit = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.HIT;
             isOnGround = _anim.GetBool(ProjectConstant.AnimatorParameter.ON_GROUND);
             isCounterBack = CheckState("CounterBack");
             isBlocked = CheckState("blocked");
    
             isCounterBackEnable = !isCounterBack && isDefense && _anim.GetBool("attack");
-            isImmortal = isRoll || isCounterBack;
+            isImmortal = isRoll || isCounterBack ;
             isAttackEnable = isOnGround && !isImmortal && !isDefense;
+            backStabEnable = isAttackEnable && !isAttack;
 
             if (isStuned && actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.STUNED)
             {

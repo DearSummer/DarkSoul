@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace DS.Role
 {
-    public class DrawWeaponState : IPlayerState {
+    public class DrawWeaponState : IPlayerState
+    {
+
 
         public void OnEnter(GameObject player, ActorController controller)
         {
-            
+            player.GetComponent<Animator>().SetBool(ProjectConstant.AnimatorParameter.DRAW_WEAPON, true);
+            controller.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         public void Update(PlayerInput inputSignal, Animator animator)

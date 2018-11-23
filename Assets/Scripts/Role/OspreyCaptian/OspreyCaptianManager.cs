@@ -5,11 +5,11 @@ namespace DS.Role.OspreyCaptian
 {
     public class OspreyCaptianManager : IEnemyActorManager {
 
-
-        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
+        protected override float GetHurtDamage(float damage)
         {
-            base.TryGetHurt(wm,counterbackEnable);
-            stateManager.AddHP(-wm.GetDamage());
+            return damage * 1.2f;
         }
+
+        
     }
 }

@@ -10,7 +10,6 @@ namespace DS.Role.Interface
         public new string name;
 
         public float hpOffset;
-
         private GameObject hp;
 
         private void Start()
@@ -32,19 +31,40 @@ namespace DS.Role.Interface
                                                            this.transform.up * hpOffset);
         }
 
-        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
+
+        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable, Vector3 pos)
         {
+
             if (wm.GetActorManager().GetCurrentStateName() == ProjectConstant.PlayerState.BACK_STAB)
             {
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
                 actorController.IssueBool(ProjectConstant.AnimatorParameter.STAFF_STUNED);
                 stateManager.StaffStuned(5f);
             }
-                
+
+            if (!stateManager.AddHP(-GetHurtDamage(wm.GetDamage())))
+            {
+                actorController.IssueTrigger(ProjectConstant.AnimatorParameter.DIE);
+                battleManager.Enable(false);
+            }
+
+            DamageUIManager.Instance.SetDamage((int)GetHurtDamage(wm.GetDamage()), pos,
+                wm.IsCrit ? ColorSet.critColor : ColorSet.normalColor);
+
+        }
+
+        
+
+        protected virtual float GetHurtDamage(float damage)
+        {
+            return damage;
         }
 
 
-
+        public bool BackStabEnable()
+        {           
+            return stateManager.backStabEnable;
+        }
 
     }
 }

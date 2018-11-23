@@ -11,6 +11,8 @@ namespace DS.Role.Interface
 
         private float height;
 
+        [Range(0,180)]
+        public float attackAngle = 45f;
         public bool isPlayer;
 
         // Use this for initialization
@@ -43,7 +45,7 @@ namespace DS.Role.Interface
         }
 
 
-        public virtual void TryGetHurt(WeaponManager wm, bool counterbackEnable)
+        public virtual void TryGetHurt(WeaponManager wm, bool counterbackEnable,Vector3 pos)
         {
         }
 

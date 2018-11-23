@@ -42,24 +42,17 @@ namespace DS.Role
                 float receiverAngle = Vector3.Angle(receiverForward, receiverDir);
                 float counterbackAngle = Vector3.Angle(receiverForward, attackerForward);
 
-                if (attackAngle < 45f)
+                if (attackAngle < wd.Manager.GetActorManager().attackAngle)
                 {
-             
-                    actorManager.TryGetHurt(wd.Manager,
-                        receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20f);
-                    wd.CloseWeaponCollider();
                     Vector3 pos = _collider.ClosestPointOnBounds(other.transform.position);
+                    actorManager.TryGetHurt(wd.Manager,
+                        receiverAngle < 45f && Mathf.Abs(counterbackAngle - 180) < 20f, pos);
+                    wd.CloseWeaponCollider();
 
-                    if (!actorManager.isPlayer)
+
+                    if (!actorManager.isPlayer && wd.Manager.IsCrit)
                     {
-                        DamageUIManager.Instance.SetDamage((int) wd.Manager.GetDamage(), pos,
-                            wd.Manager.IsCrit ? ColorSet.critColor : ColorSet.normalColor);
-
-                        if (wd.Manager.IsCrit)
-                        {
-                            FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
-                        }
-
+                        FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
                     }
 
                     wd.Manager.IsCrit = false;

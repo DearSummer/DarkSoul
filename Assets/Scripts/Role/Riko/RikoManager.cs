@@ -1,4 +1,5 @@
 ﻿using DS.Role.Interface;
+using UnityEngine;
 
 namespace DS.Role.Riko
 {
@@ -9,7 +10,7 @@ namespace DS.Role.Riko
             weaponManager.HideWeapon();
         }
 
-        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable)
+        public override void TryGetHurt(WeaponManager wm, bool counterbackEnable, Vector3 pos)
         {
 
             if (stateManager.isCounterBackEnable)

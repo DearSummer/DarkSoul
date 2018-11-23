@@ -159,6 +159,7 @@ MonoBehaviour:
   - jump
   - roll
   - defense
+  - backStab
   clearAtExit:
   - roll
 --- !u!114 &114140242281246568
@@ -893,9 +894,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.7321431
+  m_ExitTime: 0.73214304
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1108,6 +1109,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: backStab
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: draw
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102031582892413134}
@@ -1556,7 +1560,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: attack2
-  m_Speed: 1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101702274112212504}
@@ -1570,7 +1574,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b939fecde3fa94241b825932d744482a, type: 3}
+  m_Motion: {fileID: 7400000, guid: a72b2ea6b0d6f0049a68bd88e2de6460, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

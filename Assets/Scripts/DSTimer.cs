@@ -19,7 +19,7 @@ namespace DS
             set;
         }
 
-        private float _duration = 1f;
+        private float _duration = 1.2f;
         private float _elapsedTime = 0f;
 
         public void Tick()
