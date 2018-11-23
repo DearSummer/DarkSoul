@@ -8,7 +8,6 @@ namespace DS.UI
     {
 
         public Slider shadowSlider;
-
         private Slider self;
 
         private void Awake()
@@ -27,7 +26,7 @@ namespace DS.UI
         {
             while (shadowSlider.value - value > 0.01f)
             {
-                shadowSlider.value = Mathf.Lerp(shadowSlider.value, value, 0.08f);
+                shadowSlider.value = Mathf.Lerp(shadowSlider.value, value, 0.05f);
                 yield return new WaitForEndOfFrame();
             }
 

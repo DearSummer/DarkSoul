@@ -85,7 +85,7 @@ namespace DS
             GameObject cacheObj = GetFromCache(tag);
             if (cacheObj == null)
             {
-                cacheObj = Object.Instantiate(perfab);
+                cacheObj = Object.Instantiate(perfab, Vector3.zero, Quaternion.identity);
                 cacheObj.name = perfab.name + "_" + Time.time;
             }
 
