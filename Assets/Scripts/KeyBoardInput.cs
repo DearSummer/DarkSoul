@@ -44,24 +44,21 @@ namespace DS
 
 
         // Update is called once per frame
-        void Update()
+        protected override void Update()
         {
+            base.Update();
+
             InputHandler();
 
-            if (!inputEnable)
-            {
-                targetRightValue = 0f;
-                targetUpValue = 0f;
-            }
 
             HandleAction();
-            CalculationAxisSignal();
+
         }
 
         private void HandleAction()
         {
             Run = (!_btnA.IsDelaying && _btnA.IsPressing);
-            Jump = _btnA.IsExtending && _btnA.OnPressed;
+            //Jump = _btnA.IsExtending && _btnA.OnPressed;
             Roll = _btnA.IsDelaying && (_btnA.OnRelease || _btnA.IsExtending);
             Attack = _btnC.OnPressed;
             Defense = _btnD.IsPressing;

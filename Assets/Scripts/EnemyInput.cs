@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DS
 {
@@ -21,8 +22,10 @@ namespace DS
         }
 	
         // Update is called once per frame
-        void Update () {
-		    CalculationAxisSignal();
+        protected override void Update () {
+
+            base.Update();
+
 
 
             Vector3 dir = Vector3.Normalize(player.transform.position - this.transform.position);

@@ -14,7 +14,7 @@ namespace DS.Role.FSM
         void OnEnter(GameObject player, ActorController controller);
         void Update(PlayerInput inputSignal, Animator animator);
         void FixedUpdate(Rigidbody rigidbody);
-        string GetStateName();
+        byte GetStateName();
         void OnExit();
     }
 }

@@ -100,6 +100,18 @@ namespace DS
             }
         }
 
+
+        protected  virtual void Update()
+        {
+            if (!inputEnable)
+            {
+                targetRightValue = 0f;
+                targetUpValue = 0f;
+            }
+
+            CalculationAxisSignal();
+        }
+
         /// <summary>
         /// 将直角坐标系下的坐标映射为相应的圆的坐标
         /// </summary>

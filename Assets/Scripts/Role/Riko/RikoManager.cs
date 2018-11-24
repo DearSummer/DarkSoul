@@ -23,7 +23,7 @@ namespace DS.Role.Riko
 
             if (stateManager.isImmortal || stateManager.isDie)
                 return;
-            if (actorController.GetCurrentState() == ProjectConstant.PlayerState.DEFENSE)
+            if (actorController.GetCurrentState() ==(byte) ProjectConstant.PlayerState.DEFENSE)
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);
             else if (stateManager.AddHP(-wm.GetDamage()))
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);

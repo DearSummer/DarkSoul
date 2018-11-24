@@ -43,11 +43,11 @@ namespace DS.Role
 
         private void Update()
         {
-            isDie = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.DEATH;
-            isAttack = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.ATTACK;
-            isDefense = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.DEFENSE;
+            isDie = actorManager.GetCurrentStateName() ==(byte) ProjectConstant.PlayerState.DEATH;
+            isAttack = actorManager.GetCurrentStateName() == (byte)ProjectConstant.PlayerState.ATTACK;
+            isDefense = actorManager.GetCurrentStateName() == (byte)ProjectConstant.PlayerState.DEFENSE;
             isRoll = CheckState("roll");
-            isHit = actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.HIT;
+            isHit = actorManager.GetCurrentStateName() == (byte)ProjectConstant.PlayerState.HIT;
             isOnGround = _anim.GetBool(ProjectConstant.AnimatorParameter.ON_GROUND);
             isCounterBack = CheckState("CounterBack");
             isBlocked = CheckState("blocked");
@@ -57,7 +57,7 @@ namespace DS.Role
             isAttackEnable = isOnGround && !isImmortal && !isDefense;
             backStabEnable = isAttackEnable && !isAttack;
 
-            if (isStuned && actorManager.GetCurrentStateName() == ProjectConstant.PlayerState.STUNED)
+            if (isStuned && actorManager.GetCurrentStateName() == (byte)ProjectConstant.PlayerState.STUNED)
             {
                 stunedTimer += Time.deltaTime;
                 if (stunedTimer > stunedTime)

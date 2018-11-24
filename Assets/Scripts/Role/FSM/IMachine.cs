@@ -16,7 +16,7 @@ namespace DS.Role.FSM
         void FixUpdate();
         void TranslateTo(IPlayerState newPlayerState);
         IPlayerState GetCurrentState();
-        string GetCurrentStateName();
+        byte GetCurrentStateName();
     }
 }
 

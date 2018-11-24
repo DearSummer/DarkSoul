@@ -39,9 +39,9 @@ namespace DS.Role
             rigidbody.transform.position += new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z) * Time.deltaTime;
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return ProjectConstant.PlayerState.GROUND;
+            return (byte) ProjectConstant.PlayerState.GROUND;
         }
 
         public void OnExit()

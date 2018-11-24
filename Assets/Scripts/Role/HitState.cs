@@ -21,9 +21,9 @@ namespace DS.Role
            
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return ProjectConstant.PlayerState.HIT;
+            return (byte) ProjectConstant.PlayerState.HIT;
         }
 
         public void OnExit()

@@ -23,9 +23,9 @@ namespace DS.Role
             
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return ProjectConstant.PlayerState.DRAW_WEAPON;
+            return (byte) ProjectConstant.PlayerState.DRAW_WEAPON;
         }
 
         public void OnExit()

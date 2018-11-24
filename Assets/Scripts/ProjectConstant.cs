@@ -47,18 +47,18 @@ namespace DS
         }
 
 
-        public class PlayerState
+        public enum PlayerState : byte
         {
-            public static readonly string DEFENSE = "DefenseState";
-            public static readonly string DEATH = "DeathState";
-            public static readonly string HIT = "HitState";
-            public static readonly string ATTACK = "Attack";
-            public static readonly string GROUND = "GroundState";
-            public static readonly string JUMP = "AirState";
-            public static readonly string BLOCKED = "BlockedState";
-            public static readonly string DRAW_WEAPON = "DrawWeapon";
-            public static readonly string BACK_STAB = "BACKSTAB";
-            public static readonly string STUNED = "Stuned";
+            DEFENSE = 1,
+            DEATH,
+            HIT,
+            ATTACK,
+            GROUND,
+            JUMP,
+            BLOCKED,
+            DRAW_WEAPON,
+            BACK_STAB,
+            STUNED
         }
 
         public class AnimatorLayer

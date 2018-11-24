@@ -55,9 +55,9 @@ namespace DS.Role
             }
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return ProjectConstant.PlayerState.JUMP;
+            return (byte) ProjectConstant.PlayerState.JUMP;
         }
 
 

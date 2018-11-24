@@ -34,7 +34,7 @@ namespace DS.Role.Interface
             return height;
         }
 
-        public string GetCurrentStateName()
+        public byte GetCurrentStateName()
         {
             return actorController.GetCurrentState();
         }

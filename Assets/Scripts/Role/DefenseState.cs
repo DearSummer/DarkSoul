@@ -19,9 +19,9 @@ namespace DS.Role
         {
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return ProjectConstant.PlayerState.DEFENSE;
+            return (byte) ProjectConstant.PlayerState.DEFENSE;
         }
 
         public void OnExit()

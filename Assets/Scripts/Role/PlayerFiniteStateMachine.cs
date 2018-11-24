@@ -64,7 +64,7 @@ using UnityEngine;
                 return _curPlayerState;
             }
 
-            public string GetCurrentStateName()
+            public byte GetCurrentStateName()
             {
                 return _curPlayerState.GetStateName();
             }

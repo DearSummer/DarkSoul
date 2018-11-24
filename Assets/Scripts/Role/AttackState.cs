@@ -27,9 +27,9 @@ namespace DS.Role
         {
         }
 
-        public string GetStateName()
+        public byte GetStateName()
         {
-            return isStubBack ? ProjectConstant.PlayerState.BACK_STAB : ProjectConstant.PlayerState.ATTACK;
+            return (byte) (isStubBack ? ProjectConstant.PlayerState.BACK_STAB : ProjectConstant.PlayerState.ATTACK);
         }
 
         public void OnExit()

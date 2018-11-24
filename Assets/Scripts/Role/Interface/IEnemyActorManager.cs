@@ -26,16 +26,31 @@ namespace DS.Role.Interface
 
         private void Update()
         {
-            hp.transform.position =
-                UnityEngine.Camera.main.WorldToScreenPoint(this.transform.position +
-                                                           this.transform.up * hpOffset);
+            Vector3 dir = UnityEngine.Camera.main.transform.position - this.transform.position;
+            float angle = Vector3.Angle(dir, UnityEngine.Camera.main.transform.forward);
+
+            float distance = Vector3.Distance(UnityEngine.Camera.main.transform.position, this.transform.position);
+
+            if (angle > 90f && distance < 15f)
+            {
+                hp.SetActive(true);
+                hp.transform.position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main,
+                    this.transform.position +
+                    this.transform.up * hpOffset);
+            }
+            else
+            {
+                hp.SetActive(false);
+            }
+
+
         }
 
 
         public override void TryGetHurt(WeaponManager wm, bool counterbackEnable, Vector3 pos)
         {
 
-            if (wm.GetActorManager().GetCurrentStateName() == ProjectConstant.PlayerState.BACK_STAB)
+            if (wm.GetActorManager().GetCurrentStateName() ==(byte) ProjectConstant.PlayerState.BACK_STAB)
             {
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
                 actorController.IssueBool(ProjectConstant.AnimatorParameter.STAFF_STUNED);

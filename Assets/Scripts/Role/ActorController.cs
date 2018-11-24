@@ -32,6 +32,8 @@ namespace DS.Role
         private CapsuleCollider _capsuleCollider;
         private CameraController _cameraController;
 
+
+
         private Animator _animator;
         private Rigidbody _rigidbody;
 
@@ -255,7 +257,7 @@ namespace DS.Role
             _animator.SetBool(boolName, b);
         }
 
-        public string GetCurrentState()
+        public byte GetCurrentState()
         {
             return _machine.GetCurrentStateName();
         }

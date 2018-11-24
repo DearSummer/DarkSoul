@@ -32,19 +32,15 @@ namespace DS
         private readonly ButtonSignal _btnL3 = new ButtonSignal();
 
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
 
             InputHandler();
 
-            if (!inputEnable)
-            {
-                targetRightValue = 0f;
-                targetUpValue = 0f;
-            }
 
             HandleActionSignal();
-            CalculationAxisSignal();
+
         
         }
 
