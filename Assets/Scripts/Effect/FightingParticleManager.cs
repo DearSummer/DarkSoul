@@ -22,20 +22,21 @@ namespace DS.Effect
             }
         }
 
-        public void ShowEffect(int index, Vector3 pos)
+        public GameObject ShowEffect(int index, Vector3 pos)
         {
             if (index < 0 || index >= effectArray.Length)
-                return;
+                return null;
 
-            ShowEffect(effectArray[index], pos);
+            return ShowEffect(effectArray[index], pos);
         }
 
-        public void ShowEffect(GameObject effect,Vector3 pos)
+        public GameObject ShowEffect(GameObject effect,Vector3 pos)
         {
             GameObject go = ObjectPool.Instance.Get(effect);
             go.transform.position = pos;
 
-            float aliveTime = go.GetComponent<ParticleSystem>().main.duration;
+            ParticleSystem.MainModule setting = go.GetComponent<ParticleSystem>().main;
+            float aliveTime = setting.duration + setting.startLifetime.constantMax;
 
             ParticleMessage pm = new ParticleMessage
             {
@@ -44,6 +45,8 @@ namespace DS.Effect
             };
 
             messageList.Add(pm);
+
+            return go;
         }
 
 

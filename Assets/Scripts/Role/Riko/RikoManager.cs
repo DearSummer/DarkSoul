@@ -1,10 +1,15 @@
-﻿using DS.Role.Interface;
+﻿using DS.Effect;
+using DS.Role.Interface;
+using DS.UI;
 using UnityEngine;
 
 namespace DS.Role.Riko
 {
     public class RikoManager : IActorManager
     {
+
+        public SkillEffect skillEffect;
+
         private void Start()
         {
             weaponManager.HideWeapon();
@@ -16,6 +21,8 @@ namespace DS.Role.Riko
             if (stateManager.isCounterBackEnable)
             {
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.COUNTER_BACK);
+                GameObject effect = FightingParticleManager.Instance.ShowEffect(skillEffect.GetEffectObject(), this.transform.position);
+                effect.GetComponent<SkillEffect>().SetColor(ColorSet.counterBackColor);
                 wm.GetActorManager().Stuned();
                 return;
             }
@@ -23,8 +30,12 @@ namespace DS.Role.Riko
 
             if (stateManager.isImmortal || stateManager.isDie)
                 return;
-            if (actorController.GetCurrentState() ==(byte) ProjectConstant.PlayerState.DEFENSE)
-                actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);
+            if (actorController.GetCurrentState() == (byte) ProjectConstant.PlayerState.DEFENSE)
+            {                
+                GameObject effect = FightingParticleManager.Instance.ShowEffect(skillEffect.GetEffectObject(), this.transform.position);
+                effect.GetComponent<SkillEffect>().SetColor(Color.red);
+                actorController.IssueTrigger(ProjectConstant.AnimatorParameter.BLOACKED);               
+            }               
             else if (stateManager.AddHP(-wm.GetDamage()))
                 actorController.IssueTrigger(ProjectConstant.AnimatorParameter.HIT);
             else

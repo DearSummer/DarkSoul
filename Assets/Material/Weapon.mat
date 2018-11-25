@@ -76,16 +76,16 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.68
     - _GlossyReflections: 1
-    - _MainTexIntensity: 1
+    - _MainTexIntensity: 0.097
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimRange: 10
+    - _RimRange: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 5
-    - _SpecularRange: 5
+    - _SpecularIntensity: 1.51
+    - _SpecularRange: 2.84
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1

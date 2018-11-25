@@ -79,6 +79,7 @@ namespace DS.Role
 
 
             _machine.Update();
+
         }
 
         protected virtual void ActionHandler()
@@ -190,6 +191,7 @@ namespace DS.Role
             return null;
         }
 
+ 
         private void OnDeathStateEnter()
         {
             _machine.TranslateTo(_deathState);

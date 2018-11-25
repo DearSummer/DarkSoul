@@ -42,7 +42,8 @@ namespace DS.Role
 
         public void FixedUpdate(Rigidbody rigidbody)
         {
-            rigidbody.velocity = new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z) + _jumpVec;
+            rigidbody.transform.position += (new Vector3(_movingVec.x, rigidbody.velocity.y, _movingVec.z) + _jumpVec) *
+                                            Time.fixedDeltaTime;
             if (!(_jumpVec == Vector3.zero))
             {
                 _jumpVec = Vector3.zero;
