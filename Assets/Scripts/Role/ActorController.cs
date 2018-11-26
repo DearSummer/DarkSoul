@@ -136,7 +136,7 @@ namespace DS.Role
             if (!_cameraController.IsLock)
             {
                 //在非锁定敌人的状况下无需right参数进行左右移动
-                _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD, forwardValue);
+                _animator.SetFloat(ProjectConstant.AnimatorParameter.FORWARD, forwardValue,0.1f,Time.deltaTime);
                 _animator.SetFloat(ProjectConstant.AnimatorParameter.RIGHT, 0);
             }
             else

@@ -211,8 +211,8 @@ ModelImporter:
     7400002: a02_0760
     7400004: a20_3100
     7400006: a20_3400
-    7400008: a20_5100
-    7400010: a00_0160
+    7400008: counter_back
+    7400010: stuned
     7400012: a00_0000
     9500000: //RootNode
     13700000: AM
@@ -412,7 +412,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: a20_5100
+      name: counter_back
       takeName: a20_5100
       firstFrame: 0
       lastFrame: 35
@@ -421,7 +421,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
+      hasAdditiveReferencePose: 1
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
@@ -434,13 +434,20 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.5767327
+        functionName: CloseAttackCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 10
     - serializedVersion: 16
-      name: a00_0160
+      name: stuned
       takeName: a00_0160
       firstFrame: 0
       lastFrame: 70
