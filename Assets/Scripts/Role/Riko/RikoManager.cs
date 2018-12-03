@@ -1,6 +1,6 @@
 ﻿using DS.Effect;
+using DS.Game.UI;
 using DS.Role.Interface;
-using DS.UI;
 using UnityEngine;
 
 namespace DS.Role.Riko

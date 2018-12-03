@@ -1,5 +1,5 @@
-﻿using DS.Role.Interface;
-using DS.UI;
+﻿using DS.Game.UI;
+using DS.Role.Interface;
 using UnityEngine;
 
 namespace DS.Role

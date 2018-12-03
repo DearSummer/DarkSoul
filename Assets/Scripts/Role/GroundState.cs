@@ -27,7 +27,7 @@ namespace DS.Role
 
             if (inputSignal.SignalValueMagic > 0.1f)
             {
-                _player.transform.forward = Vector3.Slerp(_player.transform.forward, inputSignal.SignalVec, 0.1f);
+                _player.transform.forward = Vector3.Slerp(_player.transform.forward, inputSignal.SignalForwardVec, 0.1f);
             }
 
             _movingVec = inputSignal.SignalValueMagic * _player.transform.forward *

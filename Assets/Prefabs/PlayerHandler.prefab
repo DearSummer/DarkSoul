@@ -1315,7 +1315,8 @@ GameObject:
   - component: {fileID: 4725517217024946}
   - component: {fileID: 95320159863656454}
   - component: {fileID: 114977870621218542}
-  - component: {fileID: 114522116224048146}
+  - component: {fileID: 320748735684807722}
+  - component: {fileID: 114540908351124990}
   m_Layer: 10
   m_Name: Riko
   m_TagString: Untagged
@@ -3219,8 +3220,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214919370831758}
-  m_LocalRotation: {x: -0.00017799465, y: 0.01698436, z: -0.010477828, w: 0.99980086}
-  m_LocalPosition: {x: -0.01780174, y: -0.009604938, z: -0.003199682}
+  m_LocalRotation: {x: -0.0001780353, y: 0.01698437, z: -0.010477872, w: 0.9998008}
+  m_LocalPosition: {x: -0.017801736, y: -0.009604943, z: -0.003199726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4941713293226084}
@@ -4279,8 +4280,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1201795462742660}
-  m_LocalRotation: {x: -0.00017799465, y: 0.01698436, z: -0.010477828, w: 0.99980086}
-  m_LocalPosition: {x: 0.01780174, y: 0.009604938, z: 0.003199682}
+  m_LocalRotation: {x: -0.00017801062, y: 0.016984362, z: -0.010477827, w: 0.9998008}
+  m_LocalPosition: {x: 0.017801743, y: 0.009604942, z: 0.0031997198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4098227126267260}
@@ -6015,7 +6016,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7de5aea606b45634cbd5a72a224b710b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -6044,7 +6045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 136174111901290350}
-  offset: 0.05
+  offset: 0.3
 --- !u!114 &114387335549607926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6105,18 +6106,8 @@ MonoBehaviour:
   keyB: space
   keyC: mouse 0
   keyD: mouse 1
+  keyE: h
   mouseEnable: 1
---- !u!114 &114522116224048146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355157151950368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4a23d557ccb5e94b8e484579bd86c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114526221610201626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6138,6 +6129,17 @@ MonoBehaviour:
   isStuned: 0
   backStabEnable: 0
   unitUI: {fileID: 0}
+--- !u!114 &114540908351124990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355157151950368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a23d557ccb5e94b8e484579bd86c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114549844669890886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7511,3 +7513,23 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 1.3978264, z: 0.036000293}
     m_Extent: {x: 0.07140211, y: 0.039218426, z: 0.027067361}
   m_DirtyAABB: 0
+--- !u!320 &320748735684807722
+PlayableDirector:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355157151950368}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 4b7ef5c3697145a4eb454513df74efc5, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114563880492488230, guid: 4b7ef5c3697145a4eb454513df74efc5, type: 2}
+    value: {fileID: 95320159863656454}
+  - key: {fileID: 114387568575894554, guid: 4b7ef5c3697145a4eb454513df74efc5, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []

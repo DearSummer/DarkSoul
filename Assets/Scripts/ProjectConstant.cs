@@ -6,6 +6,8 @@
 //  description:  
 //-------------------------------------------
 
+using UnityEngine;
+
 namespace DS
 {
     public static class ProjectConstant
@@ -28,22 +30,22 @@ namespace DS
 
         public class AnimatorParameter
         {
-            public static readonly string FORWARD = "forward";
-            public static readonly string JUMP = "jump";
-            public static readonly string ON_GROUND = "onGround";
-            public static readonly string AIR = "air";
-            public static readonly string ROLL = "roll";
-            public static readonly string ATTACK = "attack";
-            public static readonly string DIE = "die";
-            public static readonly string RIGHT = "right";
-            public static readonly string HIT = "hit";
-            public static readonly string DEFENSE = "defense";
-            public static readonly string BLOACKED = "blocked";
-            public static readonly string COUNTER_BACK = "counterBack";
-            public static readonly string STUNED = "stuned";
-            public static readonly string DRAW_WEAPON = "draw";
-            public static readonly string BACK_STAB = "backStab";
-            public static readonly string STAFF_STUNED = "StaffStuned";
+            public static readonly int FORWARD = Animator.StringToHash( "forward");
+            public static readonly int JUMP = Animator.StringToHash("jump");
+            public static readonly int ON_GROUND = Animator.StringToHash("onGround");
+            public static readonly int AIR = Animator.StringToHash("air");
+            public static readonly int ROLL = Animator.StringToHash("roll");
+            public static readonly int ATTACK = Animator.StringToHash("attack");
+            public static readonly int DIE = Animator.StringToHash("die");
+            public static readonly int RIGHT = Animator.StringToHash("right");
+            public static readonly int HIT = Animator.StringToHash("hit");
+            public static readonly int DEFENSE = Animator.StringToHash("defense");
+            public static readonly int BLOACKED = Animator.StringToHash("blocked");
+            public static readonly int COUNTER_BACK = Animator.StringToHash("counterBack");
+            public static readonly int STUNED = Animator.StringToHash("stuned");
+            public static readonly int DRAW_WEAPON = Animator.StringToHash("draw");
+            public static readonly int BACK_STAB = Animator.StringToHash("backStab");
+            public static readonly int STAFF_STUNED = Animator.StringToHash("StaffStuned");
         }
 
 

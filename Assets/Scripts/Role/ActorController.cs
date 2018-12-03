@@ -249,14 +249,14 @@ namespace DS.Role
             return _animator.GetLayerIndex(layerName);
         }
 
-        public void IssueTrigger(string triggerName)
+        public void IssueTrigger(int triggerHash)
         {
-            _animator.SetTrigger(triggerName);
+            _animator.SetTrigger(triggerHash);
         }
 
-        public void IssueBool(string boolName,bool b = true)
+        public void IssueBool(int boolHash,bool b = true)
         {
-            _animator.SetBool(boolName, b);
+            _animator.SetBool(boolHash, b);
         }
 
         public byte GetCurrentState()

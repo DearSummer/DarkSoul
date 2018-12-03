@@ -40,7 +40,7 @@ namespace DS
             get;
         }
 
-        public bool Magic
+        public bool Combo
         {
             protected set;
             get;
@@ -78,7 +78,13 @@ namespace DS
             get;
         }
 
-        public Vector3 SignalVec
+        public Vector3 SignalForwardVec
+        {
+            protected set;
+            get;
+        }
+
+        public Vector2 SignalVec
         {
             protected set;
             get;
@@ -98,6 +104,11 @@ namespace DS
             {
                 inputEnable = value;
             }
+        }
+
+        public bool IsMoveInput
+        {
+            get { return !(Mathf.Approximately(targetUpValue, 0f) && Mathf.Approximately(targetRightValue, 0f)); }
         }
 
 
@@ -147,8 +158,8 @@ namespace DS
             Vector2 temp = SquareToCircle(new Vector2(UpValue, RightValue));
 
             SignalValueMagic = Mathf.Sqrt(temp.x * temp.x + temp.y * temp.y);
-            SignalVec = temp.x * this.transform.forward + temp.y * this.transform.right;
-
+            SignalForwardVec = temp.x * this.transform.forward + temp.y * this.transform.right;
+            SignalVec = new Vector2(temp.x,temp.y);
         }
     }
 }

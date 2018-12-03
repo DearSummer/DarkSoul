@@ -30,8 +30,8 @@ namespace DS
 
         [Header("-----attack key setting----")]
         public string keyC;
-
         public string keyD;
+        public string keyE;
 
         [Header("-------mouse enable------")]
         public bool mouseEnable = true;
@@ -41,7 +41,7 @@ namespace DS
         private readonly ButtonSignal _btnC = new ButtonSignal();
         private readonly ButtonSignal _btnD = new ButtonSignal();
 
-
+        private readonly ButtonSignal _btnE = new ButtonSignal();
 
         // Update is called once per frame
         protected override void Update()
@@ -60,9 +60,10 @@ namespace DS
             Run = (!_btnA.IsDelaying && _btnA.IsPressing);
             //Jump = _btnA.IsExtending && _btnA.OnPressed;
             Roll = _btnA.IsDelaying && (_btnA.OnRelease || _btnA.IsExtending);
-            Attack = _btnC.OnPressed;
+            Attack = _btnC.OnPressed || _btnC.IsDelaying;
             Defense = _btnD.IsPressing;
             LockOn = _btnB.OnPressed;
+            Combo = _btnE.OnPressed;
         }
 
 
@@ -90,6 +91,7 @@ namespace DS
             _btnB.Tick(Input.GetKey(keyB));
             _btnC.Tick(Input.GetKey(keyC));
             _btnD.Tick(Input.GetKey(keyD));
+            _btnE.Tick(Input.GetKey(keyE));
         }
 
     }
