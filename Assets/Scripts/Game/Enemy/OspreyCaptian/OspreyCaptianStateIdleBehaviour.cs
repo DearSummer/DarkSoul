@@ -28,12 +28,19 @@ namespace DS.Game.Enemy.OspreyCaptian
                 if (toTarget.sqrMagnitude < monoBehaviour.meleeRange * monoBehaviour.meleeRange)
                 {
                     if (monoBehaviour.OrientTowardTarget())
+                    {
                         animator.SetTrigger(OspreyCaptianBehaviour.hashAttack);
+
+                    }
+
+
                 }
                 else
                 {
                     monoBehaviour.StartPursuit();
                 }
+                
+
             }
         }
 

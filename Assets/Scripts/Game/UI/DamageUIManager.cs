@@ -32,7 +32,7 @@ namespace DS.Game.UI
             dt.color = color;
             dt.SetText(damage);
 
-            text.transform.position = UnityEngine.Camera.main.WorldToScreenPoint(pos);
+            text.transform.position = UnityEngine.Camera.main.WorldToScreenPoint(pos + Random.insideUnitSphere * 0.5f);
 
 
         }

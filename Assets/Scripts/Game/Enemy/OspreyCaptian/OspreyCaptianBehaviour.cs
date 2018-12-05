@@ -30,9 +30,10 @@ namespace DS.Game.Enemy.OspreyCaptian
         public TargetScanner playerScanner;
         public float meleeRange = 4f;
 
-        [Header("Refence")] public MeleeWeapon meleeWeapon;
+        [Header("Refence")]
+        public MeleeWeapon meleeWeapon;
         public Damageable damageable;
-
+        public UnitFrameEnemy enemyUI;
 
         private void Awake()
         {
@@ -40,13 +41,14 @@ namespace DS.Game.Enemy.OspreyCaptian
             meleeWeapon.SetMaster(this.gameObject);
             damageable.Register(this);
 
+            enemyUI.SetName(name);
             MonoLinkedStateMachineBehviour<OspreyCaptianBehaviour>.Initialise(Controller.Animator, this);
         }
 
 
         public void ScanTarget()
         {
-            Target = playerScanner.Detect(this.transform, Target == null);
+            Target = playerScanner.Detect(this.transform, false);
         }
 
         private void StartAttack()
@@ -72,6 +74,7 @@ namespace DS.Game.Enemy.OspreyCaptian
                 return true;
             }
 
+            transform.forward = Vector3.RotateTowards(transform.forward, v, 120f * Time.deltaTime, 0);
             return false;
         }
 

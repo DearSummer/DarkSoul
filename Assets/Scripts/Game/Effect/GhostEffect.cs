@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using DS.Runtime;
-using UnityEditorInternal.VersionControl;
+﻿using DS.Runtime;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-namespace DS.Effect
+namespace DS.Game.Effect
 {
     public class GhostEffect : MonoBehaviour
     {

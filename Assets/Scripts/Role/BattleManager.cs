@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using DS.Effect;
+using DS.Game.Effect;
 using DS.Role.Interface;
 using DS.Util;
 using UnityEngine;

@@ -54,6 +54,7 @@ namespace DS.Game.Enemy
             rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
+
             followNvaMeshAgent = true;
 
         }

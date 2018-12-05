@@ -23,11 +23,12 @@ namespace DS.Game.Weapon
         public AttackPoint[] attackPointArray = new AttackPoint[0];
 
         private Vector3[] previousAttackPos = new Vector3[0];
-
+    
         private bool isInAttack = false;
         private GameObject mastar;
 
-
+        private HashSet<GameObject> hasAttackedSet = new HashSet<GameObject>();
+        
         private static readonly RaycastHit[] raycastHitCache = new RaycastHit[32];
 
         public void SetMaster(GameObject master)
@@ -40,6 +41,7 @@ namespace DS.Game.Weapon
         {
             isInAttack = true;
             previousAttackPos = new Vector3[attackPointArray.Length];
+            hasAttackedSet.Clear();
 
             for (int i = 0; i < previousAttackPos.Length; i++)
             {
@@ -91,6 +93,10 @@ namespace DS.Game.Weapon
 
         private void CheckDamage(Collider col, AttackPoint ap,Vector3 attackDir,Vector3 worldPos)
         {
+
+            if (hasAttackedSet.Contains(col.gameObject))
+                return;
+
             Damageable damageable = col.GetComponent<Damageable>();
             if (damageable == null)
                 return;
@@ -104,12 +110,13 @@ namespace DS.Game.Weapon
             DamageData data;
 
             data.damage = damage;
-            data.attacker = this;
+            data.attacker = mastar;
             data.direction = attackDir;
             data.damagePos = col.ClosestPointOnBounds(worldPos);
 
             damageable.TryGetDamage(data);
 
+            hasAttackedSet.Add(col.gameObject);
         }
 
 

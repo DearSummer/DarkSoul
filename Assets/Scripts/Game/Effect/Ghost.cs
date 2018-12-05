@@ -1,7 +1,7 @@
 ﻿using DS.Runtime;
 using UnityEngine;
 
-namespace DS.Effect
+namespace DS.Game.Effect
 {
     public class Ghost : MonoBehaviour
     {

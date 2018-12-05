@@ -6,8 +6,9 @@ using DS.Game.Weapon;
 using UnityEngine;
 
 namespace DS.Game.Player
-{
-    [RequireComponent(typeof(CharacterController))]
+{ 
+    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Animator))]
     public class PlayerController : MonoSingleton<PlayerController>,IMessageReceiver<DamageData>
     {
@@ -32,7 +33,9 @@ namespace DS.Game.Player
         private const float stickingGravityProportion = 0.3f;
         private const float jumpAbortSpeed = 10f;
         private const float groundRayDistance = 1f;
-        private const float minEnemyDotCutOff = 0.2f;
+        private const float minEnemyDotCutOff = 0.8f;
+        private const float hitShakeRadius = 0.05f;
+        private const float hitShakeTime = 0.4f;
 
         private float verticalSpeed = 0f;
         private float forwardSpeed = 0f;
@@ -67,7 +70,9 @@ namespace DS.Game.Player
 
         private PlayerInput playerInput;
         private Animator animator;
-        private CharacterController characterController;
+       // private CharacterController characterController;
+
+        private Rigidbody rigibody;
 
         private AnimatorInfo previousFrameInfo;
         private AnimatorInfo currentFrameInfo;
@@ -82,10 +87,11 @@ namespace DS.Game.Player
         private static readonly int hashForwardSpeed = Animator.StringToHash("forward");
         private static readonly int hashAngleDetlaRad = Animator.StringToHash("angleDetlaRad");
         private static readonly int hashDefense = Animator.StringToHash("defense");
+        private static readonly int hashBlocked = Animator.StringToHash("blocked");
+        private static readonly int hashDie = Animator.StringToHash("die");
 
         //State
         private static readonly int hashStateLocotiom = Animator.StringToHash("ground");
-        private static readonly int hashStateDefense = Animator.StringToHash("defense");
 
         //TAG
         private static readonly int hashBlockInputTag = Animator.StringToHash("BlockInput");
@@ -96,12 +102,25 @@ namespace DS.Game.Player
         {
             playerInput = GetComponent<PlayerInput>();
             animator = GetComponent<Animator>();
-            characterController = GetComponent<CharacterController>();
+       //     characterController = GetComponent<CharacterController>();
+
+            rigibody = GetComponent<Rigidbody>();
 
             damageable.Register(this);
             weapon.SetMaster(this.gameObject);
 
             MonoLinkedStateMachineBehviour<PlayerController>.Initialise(animator, this);
+        }
+
+        private void Update()
+        {
+            UpdatePlayerState();
+        }
+
+        private void UpdatePlayerState()
+        {           
+            damageable.isInvnlerable = IsInDefense || damageable.isInvnlerable;
+
         }
 
         private void FixedUpdate()
@@ -125,6 +144,7 @@ namespace DS.Game.Player
 
             if (IsOrientationNeedUpdate() && playerInput.IsMoveInput)
                 UpdateOrientation();
+
 
             previousIsGround = isGround;
         }
@@ -156,11 +176,20 @@ namespace DS.Game.Player
                 movement = forwardSpeed * transform.forward * Time.fixedDeltaTime;
             }
 
-            characterController.transform.rotation *= animator.deltaRotation;
-            movement += verticalSpeed * Vector3.up * Time.fixedDeltaTime;
-            characterController.Move(movement);
+            rigibody.transform.rotation *= animator.deltaRotation;
+        //    characterController.transform.rotation *= animator.deltaRotation;
+        //    movement += verticalSpeed * Vector3.up * Time.fixedDeltaTime;
 
-            isGround = characterController.isGrounded;
+            rigibody.transform.position += movement;
+            //   characterController.Move(movement);
+            //   isGround = characterController.isGrounded;
+
+            RaycastHit hit;
+            Ray r = new Ray(transform.position + Vector3.up * groundRayDistance * 0.5f, -Vector3.up);
+            isGround = Physics.Raycast(r, out hit, groundRayDistance, Physics.AllLayers,
+                QueryTriggerInteraction.Ignore);
+
+            Debug.DrawLine(transform.position + Vector3.up * groundRayDistance * 0.5f, transform.position - Vector3.up * groundRayDistance * 0.5f);
 
             animator.SetBool(ProjectConstant.AnimatorParameter.ON_GROUND, isGround);
         }
@@ -334,7 +363,6 @@ namespace DS.Game.Player
         #endregion
 
 
-
         private struct AnimatorInfo
         {
             public AnimatorStateInfo currentStateInfo;
@@ -347,26 +375,44 @@ namespace DS.Game.Player
             switch (type)
             {
                 case MessageType.DAMAGE:
-                    ApplyDamage((DamageData) data);
+                    ApplyDamage(data);
                     break;
                 case MessageType.DIE:
                     Die();
                     break;
-                default:
+                case MessageType.INVNLERABLE:
+                    Invnlerable(data);
                     break;
             }
         }
 
+        private void Invnlerable(DamageData data)
+        {
+            if (IsInDefense)
+            {
+                Vector3 attackerPos = data.attacker.transform.position - this.transform.position;
+                float angle = Vector3.Angle(this.transform.forward, attackerPos);
+                if (angle < 30f)
+                {
+                    animator.SetTrigger(hashBlocked);
+                }
+                else
+                {
+                    //TODO : GET FROCE AND STUNED
+                }
+                
+                EndAttack();
+            }
+        }
 
         private void ApplyDamage(DamageData date)
         {
-            if(IsInDefense)
-                damageable.AddHeath(date.damage);
+            CameraShake.Shake(hitShakeRadius, hitShakeTime);
         }
 
         private void Die()
         {
-
+            animator.SetBool(hashDie, true);           
         }
     }
 }

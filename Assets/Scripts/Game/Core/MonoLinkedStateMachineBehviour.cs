@@ -42,8 +42,15 @@ namespace DS.Game.Core
                 isFristFrame = true;
         }
 
+        public sealed override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+        {
+            if (!animator.IsInTransition(layerIndex))
+                OnLinkedStateExit(animator, animatorStateInfo, layerIndex);
+        }
+
         protected virtual void OnStart(Animator animator) { }
         protected virtual void OnLinkedStateEnter(Animator animator,AnimatorStateInfo info,int layerIndex) { }
         protected virtual void OnStateUpdateWithoutTrasnlation(Animator animator,AnimatorStateInfo info,int layerIndex) { }
+        protected virtual void OnLinkedStateExit(Animator animator,AnimatorStateInfo info,int layerIndex) { }
     }
 }

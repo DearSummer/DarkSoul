@@ -38,16 +38,15 @@ namespace DS.Game.Utils
                 if (Vector3.Dot(toTargetFlat.normalized, detector.forward.normalized) >=
                     Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
                 {
-                    bool canSee = false;
-
-       
-                    canSee |= !Physics.Raycast(eyePos, toTarget.normalized, detectionRadius, targetLayer,
-                        QueryTriggerInteraction.Ignore);
-
-                    canSee |= !Physics.Raycast(eyePos, toTargetEye.normalized, toTargetEye.magnitude, targetLayer,
-                        QueryTriggerInteraction.Ignore);
-
-                    if (canSee)
+//                    bool canSee = false;
+//       
+//                    canSee |= !Physics.Raycast(eyePos, toTarget.normalized, detectionRadius, targetLayer,
+//                        QueryTriggerInteraction.Ignore);
+//
+//                    canSee |= !Physics.Raycast(eyePos, toTargetEye.normalized, toTargetEye.magnitude, targetLayer,
+//                        QueryTriggerInteraction.Ignore);
+//
+//                    if (canSee)
                         return PlayerController.Instance;
                 }
             }

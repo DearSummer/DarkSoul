@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DS.Runtime;
 using UnityEngine;
 
-namespace DS.Effect
+namespace DS.Game.Effect
 {
     public class FightingParticleManager : MonoSingleton<FightingParticleManager>
     {
         public GameObject[] effectArray;
-        private readonly List<ParticleMessage> messageList = new List<ParticleMessage>();
+        private readonly List<ParticleMessage> messageList = new List<ParticleMessage>(32);
 
         private void Update()
         {

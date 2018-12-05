@@ -19,7 +19,10 @@ namespace DS.Game.DamageSystem
 
         public int hp { private set; get; }
 
-        private bool isInvnlerable;
+        [HideInInspector]
+        public bool isInvnlerable = false;
+
+
         private float timeSinceLastHit = 0f;
 
         private Action schedule;
@@ -41,7 +44,7 @@ namespace DS.Game.DamageSystem
 
             isInvnlerable = false;
             timeSinceLastHit = 0f;
-
+    
             OnHeathRecover.Invoke();
         }
 
@@ -51,11 +54,6 @@ namespace DS.Game.DamageSystem
             if (hp < 0)
                 return;
 
-            if (isInvnlerable)
-            {
-                OnHitWhileInvnlnerable.Invoke();
-                return;
-            }
 
             Vector3 attackerPos = msg.attacker.transform.position;
             Vector3 recevierPos = this.transform.position;
@@ -64,15 +62,26 @@ namespace DS.Game.DamageSystem
             if (Vector3.Angle(hitDir, this.transform.forward) > hitAngle * 0.5f)
                 return;
 
-            hp -= msg.damage;
-            isInvnlerable = true;
+            MessageType mt;
+            if (isInvnlerable)
+            {
+                OnHitWhileInvnlnerable.Invoke();
+                mt = MessageType.INVNLERABLE;
+            }
+            else
+            {
+                hp -= msg.damage;
+                mt = hp > 0 ? MessageType.DAMAGE : MessageType.DIE;
+            }
+
+            if (invnlnerabilityTime > 0f)
+                isInvnlerable = true;
 
             if (hp < 0)
                 schedule += OnDeath.Invoke;
             else
                 OnReceiverDamage.Invoke();
 
-            MessageType mt = hp > 0 ? MessageType.DAMAGE : MessageType.DIE;
 
             for (int i = 0; i < onDamageMessageReceiverList.Count; i++)
             {
@@ -81,9 +90,9 @@ namespace DS.Game.DamageSystem
 
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (isInvnlerable)
+            if (isInvnlerable && invnlnerabilityTime > 0f)
             {
                 timeSinceLastHit += Time.deltaTime;
                 if (timeSinceLastHit > invnlnerabilityTime)
@@ -93,15 +102,13 @@ namespace DS.Game.DamageSystem
                     OnBecomeVnlnerable.Invoke();
                 }
             }
-        }
 
-        private void LateUpdate()
-        {
             if (schedule != null)
             {
                 schedule();
                 schedule = null;
             }
         }
+
     }
 }

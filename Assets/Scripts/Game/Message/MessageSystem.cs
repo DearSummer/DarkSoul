@@ -4,7 +4,8 @@ namespace DS.Game.Message
 {
     public enum MessageType  {
         DAMAGE,
-        DIE
+        DIE,
+        INVNLERABLE
     }
 
     public interface IMessageReceiver <T>
