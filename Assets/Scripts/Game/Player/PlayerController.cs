@@ -1,8 +1,11 @@
-﻿using DS.Game.Camera;
+﻿using DS.Game.Audio;
+using DS.Game.Camera;
 using DS.Game.Core;
 using DS.Game.DamageSystem;
+using DS.Game.Enemy;
 using DS.Game.Message;
 using DS.Game.Weapon;
+using DS.Runtime;
 using UnityEngine;
 
 namespace DS.Game.Player
@@ -27,6 +30,7 @@ namespace DS.Game.Player
         public CameraSetting cameraSetting;
         public Damageable damageable;
         public MeleeWeapon weapon;
+        public RandomAudioPlayer stepAudio;
 
         private const float groundAcceleration = 20f;
         private const float groundDeceleration = 25f;
@@ -74,6 +78,8 @@ namespace DS.Game.Player
 
         private Rigidbody rigibody;
 
+        private Material currentWalkingSurface = null;
+
         private AnimatorInfo previousFrameInfo;
         private AnimatorInfo currentFrameInfo;
 
@@ -89,6 +95,8 @@ namespace DS.Game.Player
         private static readonly int hashDefense = Animator.StringToHash("defense");
         private static readonly int hashBlocked = Animator.StringToHash("blocked");
         private static readonly int hashDie = Animator.StringToHash("die");
+        private static readonly int hashCounterBack = Animator.StringToHash("counterBack");
+        private static readonly int hashFootFall = Animator.StringToHash("footFall");
 
         //State
         private static readonly int hashStateLocotiom = Animator.StringToHash("ground");
@@ -118,8 +126,8 @@ namespace DS.Game.Player
         }
 
         private void UpdatePlayerState()
-        {           
-            damageable.isInvnlerable = IsInDefense || damageable.isInvnlerable;
+        {
+            damageable.isInvnlerable = IsInDefense;
 
         }
 
@@ -145,6 +153,7 @@ namespace DS.Game.Player
             if (IsOrientationNeedUpdate() && playerInput.IsMoveInput)
                 UpdateOrientation();
 
+            PlayAudio();
 
             previousIsGround = isGround;
         }
@@ -164,11 +173,16 @@ namespace DS.Game.Player
                         animator.deltaPosition + (IsInAttack || IsInDefense ? Vector3.zero : this.transform.forward) * forwardSpeed,
                         hitInfo.normal);
                     movement *= Time.fixedDeltaTime;
+
+                    Renderer goundRenderer = hitInfo.collider.GetComponentInChildren<Renderer>();
+                    currentWalkingSurface = goundRenderer ? goundRenderer.sharedMaterial : null;
                 }
                 else
                 {
                     movement = animator.deltaPosition + (IsInAttack || IsInDefense ? Vector3.zero : this.transform.forward) *
                                forwardSpeed * Time.fixedDeltaTime;
+
+                    currentWalkingSurface = null;
                 }
             }
             else
@@ -189,9 +203,28 @@ namespace DS.Game.Player
             isGround = Physics.Raycast(r, out hit, groundRayDistance, Physics.AllLayers,
                 QueryTriggerInteraction.Ignore);
 
-            Debug.DrawLine(transform.position + Vector3.up * groundRayDistance * 0.5f, transform.position - Vector3.up * groundRayDistance * 0.5f);
+          //  Debug.DrawLine(transform.position + Vector3.up * groundRayDistance * 0.5f, transform.position - Vector3.up * groundRayDistance * 0.5f);
 
             animator.SetBool(ProjectConstant.AnimatorParameter.ON_GROUND, isGround);
+        }
+
+        private void PlayAudio()
+        {
+            float footCurve = animator.GetFloat(hashFootFall);
+            if (footCurve > 0.01f && !stepAudio.isPlaying && stepAudio.canPlay)
+            {
+                stepAudio.isPlaying = true;
+                stepAudio.canPlay = false;
+                stepAudio.RandomPlay(currentWalkingSurface);
+            }
+            else if (stepAudio.isPlaying)
+            {
+                stepAudio.isPlaying = false;
+            }
+            else if (footCurve < 0.01f && !stepAudio.canPlay)
+            {
+                stepAudio.canPlay = true;
+            }
         }
 
         private void RecodeAnimatorStateInfo()
@@ -360,6 +393,7 @@ namespace DS.Game.Player
             weapon.EndAttack();
         }
 
+
         #endregion
 
 
@@ -394,7 +428,14 @@ namespace DS.Game.Player
                 float angle = Vector3.Angle(this.transform.forward, attackerPos);
                 if (angle < 30f)
                 {
-                    animator.SetTrigger(hashBlocked);
+                    if (playerInput.Attack)
+                    {
+                        data.attacker.GetComponent<EnemyBehaviour>().Stuned();
+                        StartAttack();
+                        animator.SetTrigger(hashCounterBack);
+                    }
+                    else
+                        animator.SetTrigger(hashBlocked);
                 }
                 else
                 {
@@ -402,6 +443,7 @@ namespace DS.Game.Player
                 }
                 
                 EndAttack();
+
             }
         }
 

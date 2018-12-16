@@ -1,5 +1,6 @@
 ﻿using DS.Game.Camera;
 using DS.Game.Core;
+using DS.Game.Core.Sender;
 using DS.Game.DamageSystem;
 using DS.Game.Message;
 using DS.Game.Player;
@@ -12,13 +13,14 @@ using UnityEngine;
 namespace DS.Game.Enemy.OspreyCaptian
 {
 
-    public class OspreyCaptianBehaviour : MonoBehaviour, IMessageReceiver<DamageData>
+    public class OspreyCaptianBehaviour : EnemyBehaviour, IMessageReceiver<DamageData>
     {
 
         public static readonly int hashPursuit = Animator.StringToHash("InPursuit");
         public static readonly int hashAttack = Animator.StringToHash("attack");
         public static readonly int hashSpeed = Animator.StringToHash("speed");
         public static readonly int hashDie = Animator.StringToHash("die");
+        public static readonly int hashStuned = Animator.StringToHash("stuned");
 
         public EnemyController Controller { private set; get; }
         public PlayerController Target { private set; get; }
@@ -34,12 +36,15 @@ namespace DS.Game.Enemy.OspreyCaptian
         public MeleeWeapon meleeWeapon;
         public Damageable damageable;
         public UnitFrameEnemy enemyUI;
+        public OnTriggerEnterCommand frontStubCommand;
 
         private void Awake()
         {
             Controller = GetComponent<EnemyController>();
             meleeWeapon.SetMaster(this.gameObject);
             damageable.Register(this);
+            frontStubCommand.interactorObj = PlayerController.Instance.gameObject.GetComponent<GameCommandReceiver>();
+            frontStubCommand.enabled = false;
 
             enemyUI.SetName(name);
             MonoLinkedStateMachineBehviour<OspreyCaptianBehaviour>.Initialise(Controller.Animator, this);
@@ -120,6 +125,11 @@ namespace DS.Game.Enemy.OspreyCaptian
         private void ApplyDamage(DamageData d)
         {
             DamageUIManager.Instance.SetDamage(d);
+        }
+
+        public override void Stuned()
+        {
+            Controller.Animator.SetTrigger(hashStuned);
         }
     }
 }

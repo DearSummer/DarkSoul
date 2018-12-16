@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DS.Game.DamageSystem;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DS.Game.Weapon
 {
@@ -27,7 +28,7 @@ namespace DS.Game.Weapon
         private bool isInAttack = false;
         private GameObject mastar;
 
-        private HashSet<GameObject> hasAttackedSet = new HashSet<GameObject>();
+        private readonly HashSet<GameObject> hasAttackedSet = new HashSet<GameObject>();
         
         private static readonly RaycastHit[] raycastHitCache = new RaycastHit[32];
 
@@ -81,7 +82,7 @@ namespace DS.Game.Weapon
                     {
                         Collider col = raycastHitCache[j].collider;
                         if (col != null)
-                            CheckDamage(col, ap, attackVec,worldPos);
+                            CheckDamage(col, attackVec,worldPos);
                     }
 
                     //update new postion
@@ -91,7 +92,7 @@ namespace DS.Game.Weapon
             }
         }
 
-        private void CheckDamage(Collider col, AttackPoint ap,Vector3 attackDir,Vector3 worldPos)
+        private void CheckDamage(Collider col, Vector3 attackDir,Vector3 worldPos)
         {
 
             if (hasAttackedSet.Contains(col.gameObject))
@@ -109,7 +110,7 @@ namespace DS.Game.Weapon
 
             DamageData data;
 
-            data.damage = damage;
+            data.damage = Random.Range(-2, 3) + damage;
             data.attacker = mastar;
             data.direction = attackDir;
             data.damagePos = col.ClosestPointOnBounds(worldPos);
