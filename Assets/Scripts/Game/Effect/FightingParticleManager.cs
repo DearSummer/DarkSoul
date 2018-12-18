@@ -6,7 +6,6 @@ namespace DS.Game.Effect
 {
     public class FightingParticleManager : MonoSingleton<FightingParticleManager>
     {
-        public GameObject[] effectArray;
         private readonly List<ParticleMessage> messageList = new List<ParticleMessage>(32);
 
         private void Update()
@@ -22,13 +21,6 @@ namespace DS.Game.Effect
             }
         }
 
-        public GameObject ShowEffect(int index, Vector3 pos)
-        {
-            if (index < 0 || index >= effectArray.Length)
-                return null;
-
-            return ShowEffect(effectArray[index], pos);
-        }
 
         public GameObject ShowEffect(GameObject effect,Vector3 pos)
         {

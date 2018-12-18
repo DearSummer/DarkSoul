@@ -2,6 +2,7 @@
 using DS.Game.Core;
 using DS.Game.Core.Sender;
 using DS.Game.DamageSystem;
+using DS.Game.Effect;
 using DS.Game.Message;
 using DS.Game.Player;
 using DS.Game.UI;
@@ -27,7 +28,6 @@ namespace DS.Game.Enemy.OspreyCaptian
 
         public new string name;
         public float hpOffset;
-        public GameObject hpUI;
 
         public TargetScanner playerScanner;
         public float meleeRange = 4f;
@@ -46,7 +46,9 @@ namespace DS.Game.Enemy.OspreyCaptian
             frontStubCommand.interactorObj = PlayerController.Instance.gameObject.GetComponent<GameCommandReceiver>();
             frontStubCommand.enabled = false;
 
+            enemyUI.gameObject.SetActive(true);
             enemyUI.SetName(name);
+
             MonoLinkedStateMachineBehviour<OspreyCaptianBehaviour>.Initialise(Controller.Animator, this);
         }
 
@@ -125,6 +127,7 @@ namespace DS.Game.Enemy.OspreyCaptian
         private void ApplyDamage(DamageData d)
         {
             DamageUIManager.Instance.SetDamage(d);
+           
         }
 
         public override void Stuned()

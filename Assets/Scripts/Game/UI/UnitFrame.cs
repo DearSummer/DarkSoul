@@ -15,7 +15,7 @@ namespace DS.Game.UI
 
         public void SetPrimary(Damageable d)
         {
-            primary.SetValue(value: (float)d.hp / d.hpMax);
+            primary.SetValue(value: (float) d.hp / d.hpMax);
         }
 
         public void SetSecondary(float value)

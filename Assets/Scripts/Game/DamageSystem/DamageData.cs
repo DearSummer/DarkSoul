@@ -8,6 +8,7 @@ namespace DS.Game.DamageSystem
         public GameObject attacker;
         public Vector3 direction;
         public Vector3 damagePos;
+
     }
 
 }

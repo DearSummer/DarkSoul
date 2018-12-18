@@ -51,7 +51,7 @@ namespace DS.Role
 
                     if (!actorManager.isPlayer && wd.Manager.IsCrit)
                     {
-                        FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
+                        //FightingParticleManager.Instance.ShowEffect(Random.Range(0, 2), pos);
                     }
 
                     wd.Manager.IsCrit = false;

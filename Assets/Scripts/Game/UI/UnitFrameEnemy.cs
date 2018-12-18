@@ -9,6 +9,11 @@ namespace DS.Game.UI
 
         private Vector3 scale = Vector3.zero;
 
+        public void ResetValue()
+        {
+            SetPrimary(1f);
+        }
+
         private void OnEnable()
         {
             if (scale == Vector3.zero)

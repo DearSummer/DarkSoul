@@ -13,7 +13,7 @@ namespace DS.Game.Audio
         {
             public Material[] materials;
             public SoundSet[] soundSets;
-        }
+        }  
 
         [Serializable]
         public struct SoundSet
@@ -27,7 +27,7 @@ namespace DS.Game.Audio
 
         public float playDelay = 0f;
         public SoundSet sound = new SoundSet();
-        public MaterialAudioSet[] sets;
+        public MaterialAudioSet[] materialAudioSets;
 
         [HideInInspector]
         public bool isPlaying;
@@ -43,11 +43,11 @@ namespace DS.Game.Audio
         {
             Source = GetComponent<AudioSource>();
 
-            for (int i = 0; i < sets.Length; ++i)
+            for (int i = 0; i < materialAudioSets.Length; ++i)
             {
-                foreach (var mat in sets[i].materials)
+                foreach (var mat in materialAudioSets[i].materials)
                 {
-                    soundSetDir.Add(mat, sets[i].soundSets);
+                    soundSetDir.Add(mat, materialAudioSets[i].soundSets);
                 }
             }
         }

@@ -38,7 +38,7 @@ namespace DS.Game.Player
         private const float jumpAbortSpeed = 10f;
         private const float groundRayDistance = 1f;
         private const float minEnemyDotCutOff = 0.8f;
-        private const float hitShakeRadius = 0.05f;
+        private const float hitShakeRadius = 0.4f;
         private const float hitShakeTime = 0.4f;
 
         private float verticalSpeed = 0f;
@@ -72,6 +72,21 @@ namespace DS.Game.Player
             }
         }
 
+        private bool IsGetHurt
+        {
+            get
+            {
+                return !currentFrameInfo.isAnimatorTranslationing &&
+                       currentFrameInfo.currentStateInfo.tagHash == hashHitTag ||
+                       currentFrameInfo.nextStateInfo.tagHash == hashHitTag;
+            }
+        }
+
+        private bool Moveable
+        {
+            get { return !(IsGetHurt || IsInAttack || IsInDefense); }
+        }
+
         private PlayerInput playerInput;
         private Animator animator;
        // private CharacterController characterController;
@@ -97,6 +112,9 @@ namespace DS.Game.Player
         private static readonly int hashDie = Animator.StringToHash("die");
         private static readonly int hashCounterBack = Animator.StringToHash("counterBack");
         private static readonly int hashFootFall = Animator.StringToHash("footFall");
+        private static readonly int hashHitFromX = Animator.StringToHash("hitFromX");
+        private static readonly int hashHitFromY = Animator.StringToHash("hitFromY");
+        private static readonly int hashHit = Animator.StringToHash("hit");
 
         //State
         private static readonly int hashStateLocotiom = Animator.StringToHash("ground");
@@ -105,6 +123,7 @@ namespace DS.Game.Player
         private static readonly int hashBlockInputTag = Animator.StringToHash("BlockInput");
         private static readonly int hashAttackTag = Animator.StringToHash("Attack");
         private static readonly int hashDefenseTag = Animator.StringToHash("Defense");
+        private static readonly int hashHitTag = Animator.StringToHash("Hit");
 
         private void Awake()
         {
@@ -130,6 +149,12 @@ namespace DS.Game.Player
             damageable.isInvnlerable = IsInDefense;
 
         }
+
+        #region on player move
+
+        
+
+       
 
         private void FixedUpdate()
         {
@@ -170,7 +195,7 @@ namespace DS.Game.Player
                     QueryTriggerInteraction.Ignore))
                 {
                     movement = Vector3.ProjectOnPlane(
-                        animator.deltaPosition + (IsInAttack || IsInDefense ? Vector3.zero : this.transform.forward) * forwardSpeed,
+                        animator.deltaPosition + (Moveable ? this.transform.forward : Vector3.zero ) * forwardSpeed,
                         hitInfo.normal);
                     movement *= Time.fixedDeltaTime;
 
@@ -179,7 +204,7 @@ namespace DS.Game.Player
                 }
                 else
                 {
-                    movement = animator.deltaPosition + (IsInAttack || IsInDefense ? Vector3.zero : this.transform.forward) *
+                    movement = animator.deltaPosition + (Moveable ? this.transform.forward : Vector3.zero ) *
                                forwardSpeed * Time.fixedDeltaTime;
 
                     currentWalkingSurface = null;
@@ -371,6 +396,8 @@ namespace DS.Game.Player
             this.transform.rotation = targetRotation;
         }
 
+        #endregion
+
         private bool IsDefenseable()
         {
             return !currentFrameInfo.isAnimatorTranslationing &&
@@ -404,6 +431,11 @@ namespace DS.Game.Player
             public bool isAnimatorTranslationing;
         }
 
+        #region on damage message receiver
+
+        
+
+       
         public void OnMessageReceiver(MessageType type, object sender, DamageData data)
         {
             switch (type)
@@ -418,6 +450,8 @@ namespace DS.Game.Player
                     Invnlerable(data);
                     break;
             }
+
+            EndAttack();
         }
 
         private void Invnlerable(DamageData data)
@@ -442,19 +476,33 @@ namespace DS.Game.Player
                     //TODO : GET FROCE AND STUNED
                 }
                 
-                EndAttack();
+
 
             }
         }
 
         private void ApplyDamage(DamageData date)
         {
+            animator.SetTrigger(hashHit);
+
+            Vector3 damageVec = date.direction;
+            damageVec.y = 0;
+            damageVec = damageVec.normalized;
+
+            Vector3 localHurtDir = this.transform.InverseTransformDirection(damageVec);
+
+            animator.SetFloat(hashHitFromX, localHurtDir.x);
+            animator.SetFloat(hashHitFromY, localHurtDir.z);
+
             CameraShake.Shake(hitShakeRadius, hitShakeTime);
+
         }
 
         private void Die()
         {
             animator.SetBool(hashDie, true);           
         }
+
+        #endregion
     }
 }

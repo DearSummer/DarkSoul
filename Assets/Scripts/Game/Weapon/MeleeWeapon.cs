@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DS.Game.Audio;
 using DS.Game.DamageSystem;
+using DS.Game.Effect;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,8 +10,12 @@ namespace DS.Game.Weapon
 {
     public class MeleeWeapon : MonoBehaviour
     {
-
+        [Header("--- base attr ---")]
         public int damage;
+        public int doubleDamageRate;
+
+        [Header("---- effect ---")]
+        public GameObject[] effectPrefab;
 
         [Serializable]
         public class AttackPoint
@@ -20,8 +26,13 @@ namespace DS.Game.Weapon
 
         }
 
+        [Space]
         public LayerMask targetLayers;
         public AttackPoint[] attackPointArray = new AttackPoint[0];
+
+        [Header("--- audio ---")]
+        public RandomAudioPlayer hitAudio;
+        public RandomAudioPlayer attackAudio;
 
         private Vector3[] previousAttackPos = new Vector3[0];
     
@@ -40,6 +51,9 @@ namespace DS.Game.Weapon
 
         public void StartAttack()
         {
+            if(attackAudio != null)
+                attackAudio.RandomPlay();
+
             isInAttack = true;
             previousAttackPos = new Vector3[attackPointArray.Length];
             hasAttackedSet.Clear();
@@ -92,7 +106,7 @@ namespace DS.Game.Weapon
             }
         }
 
-        private void CheckDamage(Collider col, Vector3 attackDir,Vector3 worldPos)
+        private void CheckDamage(Collider col, Vector3 attackDir, Vector3 worldPos)
         {
 
             if (hasAttackedSet.Contains(col.gameObject))
@@ -108,18 +122,44 @@ namespace DS.Game.Weapon
             if ((targetLayers.value & (1 << col.gameObject.layer)) == 0)
                 return;
 
-            DamageData data;
+            if (hitAudio != null)
+            {
+                Renderer otherRenderer = col.GetComponent<Renderer>();
+                if (!otherRenderer)
+                    otherRenderer = col.GetComponentInChildren<Renderer>();
+                if(otherRenderer)
+                    hitAudio.RandomPlay(otherRenderer.sharedMaterial);
+                else
+                    hitAudio.RandomPlay();
+            }
 
-            data.damage = Random.Range(-2, 3) + damage;
+            DamageData data = new DamageData();
+            int k = 1;
+
+            if (Random.Range(0, 100) < doubleDamageRate)
+                k = 2;
+
+            data.damage = Random.Range(-2, 3) + k * damage;
             data.attacker = mastar;
             data.direction = attackDir;
             data.damagePos = col.ClosestPointOnBounds(worldPos);
 
+   
             damageable.TryGetDamage(data);
-
             hasAttackedSet.Add(col.gameObject);
+
+            if (effectPrefab != null && effectPrefab.Length > 0)
+            {
+
+                if (k > 1 && effectPrefab.Length > 1)
+                    FightingParticleManager.Instance.ShowEffect(effectPrefab[1], data.damagePos);
+                else
+                    FightingParticleManager.Instance.ShowEffect(effectPrefab[0], data.damagePos);
+            }
         }
 
+
+       
 
         private Vector3 GetAttackPointWorldPos(AttackPoint ap)
         {
