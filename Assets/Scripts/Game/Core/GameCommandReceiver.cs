@@ -7,26 +7,26 @@ namespace DS.Game.Core
     public class GameCommandReceiver : MonoBehaviour
     {
 
-        private readonly Dictionary<GameCommandType, List<Action>> handerDic = new Dictionary<GameCommandType, List<Action>>();
+        private readonly Dictionary<GameCommandType, List<Action<object>>> handerDic = new Dictionary<GameCommandType, List<Action<object>>>();
 
-        public void Receive(GameCommandType type)
+        public void Receive(GameCommandType type,object sender)
         {
-            List<Action> callbackList;
+            List<Action<object>> callbackList;
             if (handerDic.TryGetValue(type, out callbackList))
             {
                 foreach (var i in callbackList)
                 {
-                    i();
+                    i(sender);
                 }
             }
         }
 
         public void Register(GameCommandType type, GameCommandHandler gch)
         {
-            List<Action> callbackList;
+            List<Action<object>> callbackList;
             if (!handerDic.TryGetValue(type, out callbackList))
             {
-                handerDic[type] = new List<Action>();
+                handerDic[type] = new List<Action<object>>();
                 callbackList = handerDic[type];
             }
 

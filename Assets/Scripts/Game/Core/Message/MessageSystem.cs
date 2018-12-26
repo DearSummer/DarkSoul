@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace DS.Game.Message
+﻿namespace DS.Game.Core.Message
 {
     public enum MessageType  {
         DAMAGE,

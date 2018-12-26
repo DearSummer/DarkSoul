@@ -30,7 +30,7 @@ namespace DS.Game.Enemy.OspreyCaptian
                     if (monoBehaviour.OrientTowardTarget())
                     {
                         animator.SetTrigger(OspreyCaptianBehaviour.hashAttack);
-
+                        animator.SetFloat(OspreyCaptianBehaviour.hashAttackValue, Random.value);
                     }
 
 

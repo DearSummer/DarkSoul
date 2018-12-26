@@ -14,14 +14,14 @@ namespace DS.Game.Core
         private bool hasSend = false;
         private float lastSendTime;
 
-        public void Send()
+        public void Send(object sender)
         {
             if (sendOnce && hasSend)
                 return;
 
             hasSend = false;
             lastSendTime = Time.time;
-            interactorObj.Receive(interactorType);
+            interactorObj.Receive(interactorType,sender);
 
             if(onSendAudio != null)
                 onSendAudio.PlayDelayed(audioPlayDelay);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DS.Game.Message;
+using DS.Game.Core.Message;
 using UnityEngine;
 using UnityEngine.Events;
 

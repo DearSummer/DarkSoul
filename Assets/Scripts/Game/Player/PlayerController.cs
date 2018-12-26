@@ -1,9 +1,9 @@
 ﻿using DS.Game.Audio;
 using DS.Game.Camera;
 using DS.Game.Core;
+using DS.Game.Core.Message;
 using DS.Game.DamageSystem;
 using DS.Game.Enemy;
-using DS.Game.Message;
 using DS.Game.Weapon;
 using DS.Runtime;
 using UnityEngine;
@@ -52,6 +52,13 @@ namespace DS.Game.Player
 
         private bool previousIsGround;
 
+        private bool IsInLockState
+        {
+            get { return IsInTag(hashLockTag); }
+        }
+
+       
+
         private bool IsInAttack
         {
             get
@@ -60,6 +67,11 @@ namespace DS.Game.Player
                        currentFrameInfo.currentStateInfo.tagHash == hashAttackTag ||
                        currentFrameInfo.nextStateInfo.tagHash == hashAttackTag;
             }
+        }
+
+        private bool IsInRoll
+        {
+            get { return IsInTag(hashRollTag); }
         }
 
         private bool IsInDefense
@@ -84,10 +96,14 @@ namespace DS.Game.Player
 
         private bool Moveable
         {
-            get { return !(IsGetHurt || IsInAttack || IsInDefense); }
+            get { return !(IsGetHurt || IsInAttack || IsInDefense || IsInLockState); }
         }
 
-        private PlayerInput playerInput;
+        [HideInInspector]
+        public GameObject targetEnemy;
+
+        [HideInInspector]
+        public PlayerInput playerInput;
         private Animator animator;
        // private CharacterController characterController;
 
@@ -115,15 +131,18 @@ namespace DS.Game.Player
         private static readonly int hashHitFromX = Animator.StringToHash("hitFromX");
         private static readonly int hashHitFromY = Animator.StringToHash("hitFromY");
         private static readonly int hashHit = Animator.StringToHash("hit");
+        private static readonly int hashRoll = Animator.StringToHash("roll");
 
         //State
         private static readonly int hashStateLocotiom = Animator.StringToHash("ground");
-
+        
         //TAG
         private static readonly int hashBlockInputTag = Animator.StringToHash("BlockInput");
         private static readonly int hashAttackTag = Animator.StringToHash("Attack");
         private static readonly int hashDefenseTag = Animator.StringToHash("Defense");
         private static readonly int hashHitTag = Animator.StringToHash("Hit");
+        private static readonly int hashLockTag = Animator.StringToHash("Lock");
+        private static readonly int hashRollTag = Animator.StringToHash("Roll");
 
         private void Awake()
         {
@@ -144,9 +163,16 @@ namespace DS.Game.Player
             UpdatePlayerState();
         }
 
+        private bool IsInTag(int tagHash)
+        {
+            return !currentFrameInfo.isAnimatorTranslationing &&
+                   currentFrameInfo.currentStateInfo.tagHash == tagHash ||
+                   currentFrameInfo.nextStateInfo.tagHash == tagHash;
+        }
+
         private void UpdatePlayerState()
         {
-            damageable.isInvnlerable = IsInDefense;
+            damageable.isInvnlerable = IsInDefense || IsInRoll;
 
         }
 
@@ -163,9 +189,13 @@ namespace DS.Game.Player
 
             animator.SetFloat(hashStateTime, Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1));
             animator.ResetTrigger(hashAttack);
+            animator.ResetTrigger(hashRoll);
 
             if(playerInput.Attack && canAttack)
                 animator.SetTrigger(hashAttack);
+
+            if(playerInput.Roll)
+                animator.SetTrigger(hashRoll);
 
             if (playerInput.Defense && IsDefenseable())
                 animator.SetTrigger(hashDefense);
@@ -467,6 +497,8 @@ namespace DS.Game.Player
                         data.attacker.GetComponent<EnemyBehaviour>().Stuned();
                         StartAttack();
                         animator.SetTrigger(hashCounterBack);
+
+                        targetEnemy = data.attacker;
                     }
                     else
                         animator.SetTrigger(hashBlocked);

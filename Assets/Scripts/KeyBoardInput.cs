@@ -59,7 +59,7 @@ namespace DS
         {
             Run = (!_btnA.IsDelaying && _btnA.IsPressing);
             //Jump = _btnA.IsExtending && _btnA.OnPressed;
-            Roll = _btnA.IsDelaying && (_btnA.OnRelease || _btnA.IsExtending);
+            Roll = _btnA.OnPressed || _btnA.IsDelaying;
             Attack = _btnC.OnPressed || _btnC.IsDelaying;
             Defense = _btnD.IsPressing;
             LockOn = _btnB.OnPressed;

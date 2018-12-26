@@ -1,9 +1,9 @@
 ﻿using DS.Game.Camera;
 using DS.Game.Core;
+using DS.Game.Core.Message;
 using DS.Game.Core.Sender;
 using DS.Game.DamageSystem;
 using DS.Game.Effect;
-using DS.Game.Message;
 using DS.Game.Player;
 using DS.Game.UI;
 using DS.Game.Utils;
@@ -22,6 +22,7 @@ namespace DS.Game.Enemy.OspreyCaptian
         public static readonly int hashSpeed = Animator.StringToHash("speed");
         public static readonly int hashDie = Animator.StringToHash("die");
         public static readonly int hashStuned = Animator.StringToHash("stuned");
+        public static readonly int hashAttackValue = Animator.StringToHash("attackValue");
 
         public EnemyController Controller { private set; get; }
         public PlayerController Target { private set; get; }
@@ -36,15 +37,15 @@ namespace DS.Game.Enemy.OspreyCaptian
         public MeleeWeapon meleeWeapon;
         public Damageable damageable;
         public UnitFrameEnemy enemyUI;
-        public OnTriggerEnterCommand frontStubCommand;
+    //    public OnTriggerEnterCommand frontStubCommand;
 
         private void Awake()
         {
             Controller = GetComponent<EnemyController>();
             meleeWeapon.SetMaster(this.gameObject);
             damageable.Register(this);
-            frontStubCommand.interactorObj = PlayerController.Instance.gameObject.GetComponent<GameCommandReceiver>();
-            frontStubCommand.enabled = false;
+          //  frontStubCommand.interactorObj = PlayerController.Instance.gameObject.GetComponent<GameCommandReceiver>();
+          //  frontStubCommand.IsTriggerOpen(false);
 
             enemyUI.gameObject.SetActive(true);
             enemyUI.SetName(name);
@@ -58,6 +59,11 @@ namespace DS.Game.Enemy.OspreyCaptian
             Target = playerScanner.Detect(this.transform, false);
         }
 
+        #region animation event
+
+        
+
+        
         private void StartAttack()
         {
             meleeWeapon.StartAttack();
@@ -67,6 +73,9 @@ namespace DS.Game.Enemy.OspreyCaptian
         {
             meleeWeapon.EndAttack();
         }
+
+        #endregion
+
 
         public bool OrientTowardTarget()
         {

@@ -7,12 +7,12 @@ namespace DS.Game.Enemy.OspreyCaptian
 
         protected override void OnLinkedStateEnter(Animator animator, AnimatorStateInfo info, int layerIndex)
         {
-            monoBehaviour.frontStubCommand.enabled = true;
+    //        monoBehaviour.frontStubCommand.IsTriggerOpen(true); 
         }
 
         protected override void OnLinkedStateExit(Animator animator, AnimatorStateInfo info, int layerIndex)
         {
-            monoBehaviour.frontStubCommand.enabled = false;
+     //       monoBehaviour.frontStubCommand.IsTriggerOpen(false);
         }
     }
 }

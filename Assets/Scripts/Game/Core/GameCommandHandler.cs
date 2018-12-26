@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace DS.Game.Core
 {
@@ -13,14 +14,16 @@ namespace DS.Game.Core
         private bool hasAction = false;
         private float startTime = 0;
 
+        private float timer = 0;
+
         private void Awake()
         {
             GetComponent<GameCommandReceiver>().Register(type, this);
         }
 
-        public abstract void PerformInteractor();
+        public abstract void PerformInteractor(object sender);
 
-        public virtual void OnInteractor()
+        public virtual void OnInteractor(object sender)
         {
             if (actionOnce && hasAction)
                 return;
@@ -32,19 +35,33 @@ namespace DS.Game.Core
                 if (Time.time > startTime + coolDown)
                 {
                     startTime += Time.time + startDelay;
-                    ExcuteInteractor();
+                    ExcuteInteractor(sender);
                 }
             }
             else
-                ExcuteInteractor();
+                ExcuteInteractor(sender);
         }
 
-        public void ExcuteInteractor()
+        public void ExcuteInteractor(object sender)
         {
+            
             if (startDelay > 0)
-                Invoke("PerformInteractor", startDelay);
+                StartCoroutine(ExcuteInteractorDelay(sender));
             else
-                PerformInteractor();
+                PerformInteractor(sender);
+        }
+
+        private IEnumerator ExcuteInteractorDelay(object sender)
+        {
+            while (timer < startDelay)
+            {
+                timer += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            PerformInteractor(sender);
+            timer = 0;
+           
         }
     }
 }

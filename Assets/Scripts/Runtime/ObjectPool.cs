@@ -84,7 +84,7 @@ namespace DS.Runtime
             GameObject cacheObj = GetFromCache(tag);
             if (cacheObj == null)
             {
-                cacheObj = Object.Instantiate(perfab, Vector3.zero, Quaternion.identity);
+                cacheObj = Object.Instantiate(perfab, Vector3.zero, perfab.transform.rotation);
                 cacheObj.name = perfab.name + "_" + Time.time;
             }
 

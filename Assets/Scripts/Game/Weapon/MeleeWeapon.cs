@@ -89,7 +89,7 @@ namespace DS.Game.Weapon
                     }
 
                     Ray r = new Ray(worldPos,attackVec.normalized);
-                    int contacts = Physics.SphereCastNonAlloc(r, ap.radius, raycastHitCache, attackVec.magnitude, ~0,
+                    int contacts = Physics.SphereCastNonAlloc(r, ap.radius, raycastHitCache, attackVec.magnitude, targetLayers,
                         QueryTriggerInteraction.Ignore);
             
                     for (int j = 0; j < contacts; j++)
@@ -119,8 +119,8 @@ namespace DS.Game.Weapon
             if (damageable.gameObject == mastar)
                 return;
 
-            if ((targetLayers.value & (1 << col.gameObject.layer)) == 0)
-                return;
+//            if ((targetLayers.value & (1 << col.gameObject.layer)) == 0)
+//                return;
 
             if (hitAudio != null)
             {
