@@ -132,6 +132,7 @@ namespace DS.Game.Player
         private static readonly int hashHitFromY = Animator.StringToHash("hitFromY");
         private static readonly int hashHit = Animator.StringToHash("hit");
         private static readonly int hashRoll = Animator.StringToHash("roll");
+        private static readonly int hashWrapStrike = Animator.StringToHash("WrapStrike");
 
         //State
         private static readonly int hashStateLocotiom = Animator.StringToHash("ground");
@@ -190,6 +191,10 @@ namespace DS.Game.Player
             animator.SetFloat(hashStateTime, Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1));
             animator.ResetTrigger(hashAttack);
             animator.ResetTrigger(hashRoll);
+            animator.ResetTrigger(hashWrapStrike);
+
+            if(playerInput.WrapStrike && canAttack)
+                animator.SetTrigger(hashWrapStrike);
 
             if(playerInput.Attack && canAttack)
                 animator.SetTrigger(hashAttack);
@@ -225,9 +230,8 @@ namespace DS.Game.Player
                     QueryTriggerInteraction.Ignore))
                 {
                     movement = Vector3.ProjectOnPlane(
-                        animator.deltaPosition + (Moveable ? this.transform.forward : Vector3.zero ) * forwardSpeed,
+                        animator.deltaPosition + ((Moveable ? this.transform.forward : Vector3.zero ) * forwardSpeed) * Time.fixedDeltaTime,
                         hitInfo.normal);
-                    movement *= Time.fixedDeltaTime;
 
                     Renderer goundRenderer = hitInfo.collider.GetComponentInChildren<Renderer>();
                     currentWalkingSurface = goundRenderer ? goundRenderer.sharedMaterial : null;

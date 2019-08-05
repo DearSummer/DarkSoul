@@ -46,6 +46,12 @@ namespace DS
             get;
         }
 
+        public bool WrapStrike
+        {
+            protected set;
+            get;
+        }
+
         //摄像机的上方向信号量
         public float CUpValue
         {

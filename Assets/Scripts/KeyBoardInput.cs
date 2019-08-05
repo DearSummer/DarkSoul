@@ -26,7 +26,7 @@ namespace DS
         public string cKeyRight;
 
         [Header("-----run key------")] public string keyA;
-        [Header("------jump key-----")] public string keyB;
+        [Header("------lock key-----")] public string keyB;
 
         [Header("-----attack key setting----")]
         public string keyC;
@@ -63,7 +63,7 @@ namespace DS
             Attack = _btnC.OnPressed || _btnC.IsDelaying;
             Defense = _btnD.IsPressing;
             LockOn = _btnB.OnPressed;
-            Combo = _btnE.OnPressed;
+            WrapStrike = _btnE.OnPressed;
         }
 
 

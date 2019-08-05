@@ -32,8 +32,8 @@ namespace DS.Game.Camera
         {
             keybordFreeLookCamera.Follow = follow;
             keybordFreeLookCamera.LookAt = lookAt;
-            keybordFreeLookCamera.m_XAxis.m_InvertAxis = keybordInvertSetting.invertX;
-            keybordFreeLookCamera.m_YAxis.m_InvertAxis = keybordInvertSetting.invertY;
+            keybordFreeLookCamera.m_XAxis.m_InvertInput = keybordInvertSetting.invertX;
+            keybordFreeLookCamera.m_YAxis.m_InvertInput = keybordInvertSetting.invertY;
 
             Cursor.lockState = CursorLockMode.Locked;
 

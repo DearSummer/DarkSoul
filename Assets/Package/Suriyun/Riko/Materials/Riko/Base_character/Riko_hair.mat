@@ -4,11 +4,12 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Riko_hair
-  m_Shader: {fileID: 4800000, guid: b35a2abbdd5b15d4ca40103088758eac, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_Shader: {fileID: 4800000, guid: 701bd099d8b12e64ebe116e542b675a5, type: 3}
+  m_ShaderKeywords: BOOLEAN_F49FEA30_ON _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -18,6 +19,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_27CC8B62:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_30ECF124:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_6FD19A53:
+        m_Texture: {fileID: 2800000, guid: 5467ccada4a0be947bc311752be68ce5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E3E893B5:
+        m_Texture: {fileID: 2800000, guid: 5467ccada4a0be947bc311752be68ce5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E7C0849C:
+        m_Texture: {fileID: 2800000, guid: 5467ccada4a0be947bc311752be68ce5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,11 +91,25 @@ Material:
         m_Texture: {fileID: 2800000, guid: 36249473fe1adf442ab986148d327186, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_20270770_Texture:
+        m_Texture: {fileID: 2800000, guid: 5ccc303d43a8fff4faa9c22a6cb409b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularReflectionSampler:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_6C2D2CE1: 0
+    - Boolean_72336258: 0
+    - Boolean_F49FEA30: 1
+    - Vector1_1D7ACF84: 0
+    - Vector1_28D89A: 6.4
+    - Vector1_506E4AB9: -35.88
+    - Vector1_7986487A: 3.72
+    - Vector1_8230F4C8: 1
+    - Vector1_9EBBB411: 6.48
+    - Vector1_FC617F56: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DepthBias: 0.00012
@@ -95,6 +130,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_D54EC03B: {r: 1, g: 0.9858491, b: 0.9858491, a: 0}
+    - Color_DF86F44E: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
