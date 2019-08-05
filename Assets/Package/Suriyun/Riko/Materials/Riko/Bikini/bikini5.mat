@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: bikini5
-  m_Shader: {fileID: 4800000, guid: fd80c305ffeadab449471321e2bce0d9, type: 3}
-  m_ShaderKeywords: BOOLEAN_F49FEA30_ON OUTLINE_FRONT _EMISSION
-  m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_Shader: {fileID: 4800000, guid: d84268709d11078d11005b9844295342, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 6
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -99,11 +99,19 @@ Material:
         m_Texture: {fileID: 2800000, guid: 5ccc303d43a8fff4faa9c22a6cb409b2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularReflectionSampler:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -118,8 +126,11 @@ Material:
     - Vector1_8230F4C8: 9.75
     - Vector1_9EBBB411: 2.15
     - Vector1_FC617F56: 0
+    - _AlphaClip: 0
+    - _Blend: 0
     - _Border: 0.01
     - _BumpScale: 1
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DepthBias: 0.00012
     - _DetailNormalMapScale: 1
@@ -133,12 +144,16 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineFront: 1
     - _Parallax: 0.02
+    - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularEnable: 0
     - _SpecularHighlights: 1
     - _SpecularPower: 20
     - _SrcBlend: 1
+    - _Surface: 0
     - _UVSec: 0
+    - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
     - Color_D54EC03B: {r: 1, g: 1, b: 1, a: 0}
@@ -147,3 +162,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
